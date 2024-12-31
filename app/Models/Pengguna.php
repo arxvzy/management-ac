@@ -24,7 +24,6 @@ class Pengguna extends Authenticatable
         'nama',
         'username',
         'password',
-        'role',
         'is_active',
     ];
 
