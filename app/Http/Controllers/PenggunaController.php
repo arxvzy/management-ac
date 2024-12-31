@@ -12,7 +12,8 @@ class PenggunaController extends Controller
      */
     public function index()
     {
-        //
+        $pengguna = Pengguna::with('roles')->get();
+        return view('pengguna.index', compact('pengguna'));
     }
 
     /**
@@ -28,7 +29,14 @@ class PenggunaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pengguna = new Pengguna();
+        $pengguna->nama = $request->nama;
+        $pengguna->username = $request->username;
+        $pengguna->password = bcrypt($request->password);
+        $pengguna->save();
+        return redirect()->route('pengguna.index')
+            ->with('status', 'success')
+            ->with('message', 'Pengguna berhasil ditambahkan');
     }
 
     /**
@@ -60,6 +68,9 @@ class PenggunaController extends Controller
      */
     public function destroy(Pengguna $pengguna)
     {
-        //
+        $pengguna->delete();
+        return redirect()->route('pengguna.index')
+            ->with('status', 'success')
+            ->with('message', 'Pengguna berhasil dihapus');
     }
 }
