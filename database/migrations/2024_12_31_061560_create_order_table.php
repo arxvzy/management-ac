@@ -20,8 +20,8 @@ return new class extends Migration
             $table->float('harga_awal');
             $table->float('harga_akhir');
             $table->dateTime('tgl_pengerjaan');
-            $table->string('status');
-            $table->text('testimoni');     
+            $table->string('status')->nullable();
+            $table->text('testimoni')->nullable();     
             $table->timestamps();
 
             $table->foreign('id_jasa')->references('id')->on('jasa');

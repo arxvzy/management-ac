@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengeluaran', function (Blueprint $table) {
             $table->id();
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->float('nominal');
             $table->dateTime('tgl_pembelian');
             $table->unsignedBigInteger('id_pengguna');
