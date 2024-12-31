@@ -16,8 +16,8 @@ return new class extends Migration
             $table->text('keterangan');
             $table->float('nominal');
             $table->dateTime('tgl_pembelian');
-            $table->integer('id_pengguna');
-            $table->foreignId('id_pengguna')->references('id')->on('pengguna');
+            $table->unsignedBigInteger('id_pengguna');
+            $table->foreign('id_pengguna')->references('id')->on('pengguna');
             $table->timestamps();
         });
     }
