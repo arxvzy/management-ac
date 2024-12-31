@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_jasa');
-            $table->integer('id_pengguna');
-            $table->integer('id_pelanggan');
+            $table->unsignedBigInteger('id_jasa');
+            $table->unsignedBigInteger('id_pengguna');
+            $table->unsignedBigInteger('id_pelanggan');
             $table->date('jadwal');
             $table->float('harga_awal');
             $table->float('harga_akhir');
