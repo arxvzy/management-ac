@@ -13,7 +13,7 @@ class PenggunaController extends Controller
     public function index()
     {
         $pengguna = Pengguna::with('roles')->get();
-        return view('pengguna.index', compact('pengguna'));
+        return view('admin.pengguna.index', compact('pengguna'));
     }
 
     /**
@@ -21,7 +21,7 @@ class PenggunaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tambah');
     }
 
     /**
