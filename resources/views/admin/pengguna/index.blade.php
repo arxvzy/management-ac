@@ -1,9 +1,14 @@
 @extends('layouts.admin')
+@section('title', 'Pengguna')
 @section('content')
     <div class="container grid px-6 mx-auto">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Pengguna
         </h2>
+
+        @if (session()->has('success'))
+            <x-alert-user />
+        @endif
 
         <h4 class="my-4 text-lg font-semibold">
             <x-button class="py-2" href="{{ route('admin.pengguna.tambah') }}">Tambah</x-button>
