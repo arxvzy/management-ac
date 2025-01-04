@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class PenggunaController extends Controller
 {
@@ -21,7 +22,7 @@ class PenggunaController extends Controller
      */
     public function create()
     {
-        return view('admin.tambah');
+        return view('admin.pengguna.tambah');
     }
 
     /**
@@ -29,14 +30,23 @@ class PenggunaController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+        'nama' => 'required|string|max:255', 
+        'username' => 'required|unique:pengguna,username|max:16',
+        'password' => 'required|min:6',
+        'role' => 'required'
+        ]);
+
         $pengguna = new Pengguna();
         $pengguna->nama = $request->nama;
         $pengguna->username = $request->username;
         $pengguna->password = bcrypt($request->password);
         $pengguna->save();
-        return redirect()->route('pengguna.index')
-            ->with('status', 'success')
-            ->with('message', 'Pengguna berhasil ditambahkan');
+        
+        // $role = Role::firstOrCreate(['name' => $request->role]);
+        // $pengguna->assignRole($role);
+
+        return redirect()->route('admin.pengguna.index');
     }
 
     /**
