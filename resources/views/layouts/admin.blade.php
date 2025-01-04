@@ -4,40 +4,26 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description"
-        content="The modern, accessible and dark theme ready HTML dashboard. Full of custom, reusable components to speed up the development of admin panels.">
-    <meta name="author" content="abdulbasit-dev">
-    <title>Laravel Windmill Dashboard</title>
+    <title>@yield('title')</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/tailwind.output.css" />
-    <link rel="stylesheet" href="/assets/css/Chart.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="/assets/js/init-alpine.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    {{-- favicon --}}
-    <link rel="icon" sizes="180x180" href="{{ asset('assets/img/windmill.png') }}">
 </head>
 
 <body>
-    <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
-        <!-- Desktop sidebar -->
-        @include('includes.desktop-sidebar')
-
-        <!-- Mobile sidebar -->
-        @include('includes.mobile-sidebar')
-
+    <div class="flex h-screen bg-gray-50 dark:bg-gray-900 font-inter" :class="{ 'overflow-hidden': isSideMenuOpen }">
+        <x-sidebar />
         <div class="flex flex-col flex-1 w-full">
-            @include('includes.header')
+            <x-header />
             <main class="h-full overflow-y-auto">
-                @yield('content')
+                <div class="container px-6 mx-auto grid">
+                    @yield('content')
+                </div>
             </main>
         </div>
     </div>
-
-    <script src="assets/js/alpine.min.js" defer></script>
-    <script src="assets/js/Chart.min.js" defer></script>
-    <script src="assets/js/init-alpine.js"></script>
-    <script src="assets/js/charts-lines.js" defer></script>
-    <script src="assets/js/charts-pie.js" defer></script>
 </body>
 
 </html>
