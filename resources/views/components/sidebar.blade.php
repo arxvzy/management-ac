@@ -16,8 +16,17 @@
                     <span class="ml-4">Dashboard</span>
                 </a>
             </li>
-        </ul>
-        <ul>
+            <li class="relative px-6 py-3">
+                @if (request()->routeIs('admin.pelanggan.*'))
+                    <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                        aria-hidden="true"></span>
+                @endif
+                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                    href="{{ route('admin.pelanggan.index') }}">
+                    <x-heroicon-o-users class="w-5 h-5" />
+                    <span class="ml-4">Pelanggan</span>
+                </a>
+            </li>
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('admin.pengguna.*'))
                     <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
@@ -29,7 +38,6 @@
                     <span class="ml-4">Pengguna</span>
                 </a>
             </li>
-
         </ul>
     </div>
 </aside>
@@ -62,8 +70,17 @@
                     <span class="ml-4">Dashboard</span>
                 </a>
             </li>
-        </ul>
-        <ul>
+            <li class="relative px-6 py-3">
+                @if (request()->routeIs('admin.pelanggan.*'))
+                    <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                        aria-hidden="true"></span>
+                @endif
+                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                    href="{{ route('admin.pelanggan.index') }}">
+                    <x-heroicon-o-users class="w-5 h-5" />
+                    <span class="ml-4">Pelanggan</span>
+                </a>
+            </li>
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('admin.pengguna.*'))
                     <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
