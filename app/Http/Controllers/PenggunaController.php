@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 
 class PenggunaController extends Controller
 {
@@ -13,7 +12,7 @@ class PenggunaController extends Controller
      */
     public function index()
     {
-        $pengguna = Pengguna::with('roles')->get();
+        $pengguna = Pengguna::all();
         return view('admin.pengguna.index', compact('pengguna'));
     }
 
@@ -41,46 +40,46 @@ class PenggunaController extends Controller
         $pengguna->nama = $request->nama;
         $pengguna->username = $request->username;
         $pengguna->password = bcrypt($request->password);
+        $pengguna->role = $request->role;
         $pengguna->save();
-        
-        // $role = Role::firstOrCreate(['name' => $request->role]);
-        // $pengguna->assignRole($role);
+
 
         return redirect()->route('admin.pengguna.index');
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Pengguna $pengguna)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pengguna $pengguna)
+    public function edit(int $id)
     {
-        //
+        $pengguna = Pengguna::findOrFail($id);
+        return view('admin.pengguna.edit', compact('pengguna'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pengguna $pengguna)
+    public function update(Request $request, int $id)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255', 
+            'username' => 'required|max:16',
+            'password' => 'required|min:6',
+            'role' => 'required'
+            ]);
+
+        $pengguna = Pengguna::findOrFail($id);
+        $pengguna->update($validated);
+        return redirect()->route('admin.pengguna.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pengguna $pengguna)
+    public function destroy(int $id)
     {
-        $pengguna->delete();
-        return redirect()->route('pengguna.index')
-            ->with('status', 'success')
-            ->with('message', 'Pengguna berhasil dihapus');
+        $user = Pengguna::findOrFail($id);
+        $user->delete();
+        return redirect()->route('admin.pengguna.index');
     }
 }
