@@ -23,6 +23,7 @@
                             <th class="px-3 py-3">Nama</th>
                             <th class="px-3 py-3">Username</th>
                             <th class="px-3 py-3">Status</th>
+                            <th class="px-3 py-3">Role</th>
                             <th class="px-3 py-3">Actions</th>
                         </tr>
                     </thead>
@@ -51,16 +52,24 @@
                                         </span>
                                     @endif
                                 </td>
+                                <td class="px-3 py-3 text-sm">
+                                    {{ $user->role }}
+                                </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center space-x-4 text-sm">
-                                        <button
-                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                        <a href="{{ route('admin.pengguna.edit', $user->id) }}"
+                                            class="flex items-center justify-start px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray "
                                             aria-label="Edit">
                                             <x-heroicon-s-pencil class="w-5 h-5" />
-                                        </button>
+                                        </a>
+                                        <form action="{{ route('admin.pengguna.hapus', $user->id) }}" method="POST"
+                                            style="display: none;" id="delete-form-{{ $user->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                         <button
-                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                            aria-label="Delete">
+                                            onclick="event.preventDefault(); confirmDelete({{ $user->id }}, '{{ $user->nama }}');"
+                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-red-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                                             <x-heroicon-s-trash class="w-5 h-5" />
                                         </button>
                                     </div>
@@ -74,3 +83,22 @@
         </div>
     </div>
 @endsection
+
+<script>
+    function confirmDelete(userId, userName) {
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: `Anda akan menghapus pengguna "${userName}"`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#805ad5',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(`delete-form-${userId}`).submit();
+            }
+        });
+    }
+</script>
