@@ -69,6 +69,7 @@ class PenggunaController extends Controller
             ]);
 
         $pengguna = Pengguna::findOrFail($id);
+        $validated['password'] = bcrypt($request->password);
         $pengguna->update($validated);
         return redirect()->route('admin.pengguna.index');
     }
