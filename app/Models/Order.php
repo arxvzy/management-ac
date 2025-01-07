@@ -13,6 +13,7 @@ class Order extends Model
         'id_pengguna',
         'id_pelanggan',
         'jadwal',
+        'metode_pembayaran',
         'harga_awal',
         'harga_akhir',
         'tgl_pengerjaan',

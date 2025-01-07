@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('jadwal');
             $table->float('harga_awal');
             $table->float('harga_akhir');
+            $table->string('metode_pembayaran');
             $table->dateTime('tgl_pengerjaan');
             $table->string('status')->nullable();
             $table->text('testimoni')->nullable();     
