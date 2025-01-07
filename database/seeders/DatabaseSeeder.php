@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Arya Bima',
             'username' => 'aryabima',
             'password' => bcrypt('123'),
+            'role' => 'admin',
             'is_active' => true
         ]);
     }
