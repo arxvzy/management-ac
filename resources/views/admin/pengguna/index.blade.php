@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 @section('title', 'Pengguna')
 @section('content')
-    <div class="container grid px-6 mx-auto">
+    <div>
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Pengguna
         </h2>
 
         @if (session()->has('success'))
-            <x-alert-user />
+            <x-alert>Pengguna</x-alert>
         @endif
 
         <h4 class="my-4 text-lg font-semibold">
@@ -68,7 +68,7 @@
                                             @method('DELETE')
                                         </form>
                                         <button
-                                            onclick="event.preventDefault(); confirmDelete({{ $user->id }}, '{{ $user->nama }}');"
+                                            onclick="event.preventDefault(); confirmDelete({{ $user->id }}, '{{ $user->nama }}', 'pengguna');"
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-red-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                                             <x-heroicon-s-trash class="w-5 h-5" />
                                         </button>
@@ -83,22 +83,3 @@
         </div>
     </div>
 @endsection
-
-<script>
-    function confirmDelete(userId, userName) {
-        Swal.fire({
-            title: 'Apakah anda yakin?',
-            text: `Anda akan menghapus pengguna "${userName}"`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#805ad5',
-            confirmButtonText: 'Ya, Hapus!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById(`delete-form-${userId}`).submit();
-            }
-        });
-    }
-</script>

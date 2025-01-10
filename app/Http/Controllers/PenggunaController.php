@@ -44,7 +44,8 @@ class PenggunaController extends Controller
         $pengguna->save();
 
 
-        return redirect()->route('admin.pengguna.index');
+        return redirect()->route('admin.pengguna.index')
+        ->with('success', 'Pengguna berhasil ditambahkan');
     }
 
     /**
