@@ -34,7 +34,7 @@
                 @endif
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     href="{{ route('admin.pengguna.index') }}">
-                    <x-heroicon-o-users class="w-5 h-5" />
+                    <x-heroicon-o-user-circle class="w-5 h-5" />
                     <span class="ml-4">Pengguna</span>
                 </a>
             </li>
@@ -88,7 +88,7 @@
                 @endif
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     href="{{ route('admin.pengguna.index') }}">
-                    <x-heroicon-o-users class="w-5 h-5" />
+                    <x-heroicon-o-user-circle class="w-5 h-5" />
                     <span class="ml-4">Pengguna</span>
                 </a>
             </li>
