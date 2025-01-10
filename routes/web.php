@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PelangganController;
 
-// Route::group(['prefix' => 'dashboard'], function () {
-    //single action controllers
+
     Route::get('/', function () { return view('admin.index'); })->name('admin.home');
 
     Route::get('/pengguna', [PenggunaController::class, 'index'])->name('admin.pengguna.index');
@@ -16,5 +15,9 @@ use App\Http\Controllers\PelangganController;
     Route::put('/pengguna/{id}', [PenggunaController::class, 'update'])->name('admin.pengguna.update');
 
     Route::get('/pelanggan', [PelangganController::class, 'index'])->name('admin.pelanggan.index');
-// });
+    Route::get('/pelanggan/tambah', [PelangganController::class, 'create'])->name('admin.pelanggan.tambah');
+    Route::post('/pelanggan', [PelangganController::class, 'store'])->name('admin.pelanggan.simpan');
+    Route::get('/pelanggan/{pelanggan}/edit', [PelangganController::class, 'edit'])->name('admin.pelanggan.edit');
+    Route::delete('/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('admin.pelanggan.hapus');
+    Route::put('/pelanggan/{id}', [PelangganController::class, 'update'])->name('admin.pelanggan.update');
 
