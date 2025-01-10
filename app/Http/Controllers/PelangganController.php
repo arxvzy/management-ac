@@ -37,7 +37,8 @@ class PelangganController extends Controller
         ]);
 
         $pelanggan = Pelanggan::create($validated);
-        return redirect()->route('admin.pelanggan.index');
+        return redirect()->route('admin.pelanggan.index')
+        ->with('success', 'Pelanggan berhasil ditambahkan');
     }
 
 
@@ -53,7 +54,7 @@ class PelangganController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pelanggan $pelanggan)
+    public function update(Request $request, Pelanggan $id)
     {
         $validated = $request->validate([
         'nama' => 'required|string|max:255', 
@@ -62,16 +63,16 @@ class PelangganController extends Controller
         'koordinat' => 'required'
         ]);
 
-        $pelanggan->update($validated);
+        $id->update($validated);
         return redirect()->route('admin.pelanggan.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pelanggan $pelanggan)
+    public function destroy(Pelanggan $id)
     {
-        $pelanggan->delete();
+        $id->delete();
         return redirect()->route('admin.pelanggan.index');
     }
 }
