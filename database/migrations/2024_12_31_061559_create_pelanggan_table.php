@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('no_hp')->nullable();
             $table->string('alamat');
             $table->string('koordinat');
+            $table->boolean('is_reminded')->nullable();
             $table->timestamps();
         });
     }
