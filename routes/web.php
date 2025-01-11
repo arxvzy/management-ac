@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PengeluaranController;
 
 
     Route::get('/', function () { return view('admin.index'); })->name('admin.home');
@@ -21,3 +22,6 @@ use App\Http\Controllers\PelangganController;
     Route::delete('/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('admin.pelanggan.hapus');
     Route::put('/pelanggan/{id}', [PelangganController::class, 'update'])->name('admin.pelanggan.update');
 
+    Route::get('/pengeluaran', [PengeluaranController::class, 'index'])->name('admin.pengeluaran.index');
+    Route::get('/pengeluaran/tambah', [PengeluaranController::class, 'create'])->name('admin.pengeluaran.tambah');
+    Route::post('/pengeluaran', [PengeluaranController::class, 'store'])->name('admin.pengeluaran.simpan');
