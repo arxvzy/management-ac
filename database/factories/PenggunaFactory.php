@@ -27,7 +27,7 @@ class PenggunaFactory extends Factory
             'nama' => fake()->name(),
             'username' => fake()->userName(),
             'is_active' => true,
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('12345678'),
         ];
     }
 

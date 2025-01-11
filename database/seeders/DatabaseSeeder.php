@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         Pengguna::factory()->create([
-            'nama' => 'Arya Bima',
-            'username' => 'aryabima',
-            'password' => bcrypt('123'),
+            'nama' => 'Init Admin',
+            'username' => 'initadmin',
+            'password' => bcrypt('123456'),
             'role' => 'admin',
             'is_active' => true
         ]);
