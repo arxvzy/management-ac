@@ -13,8 +13,8 @@ class PengeluaranController extends Controller
      */
     public function index()
     {
-        $pengeluaran = Pengeluaran::all();
-        return view('admin.pengeluaran.index', compact('pengeluaran'));
+        $pengeluarans = Pengeluaran::with('pengguna')->get();
+        return view('admin.pengeluaran.index', compact('pengeluarans'));
     }
 
     /**
@@ -38,9 +38,10 @@ class PengeluaranController extends Controller
 
         $validated['id_pengguna'] = Auth::id();
 
-        $pengeluaran = Pengeluaran::create($validated);
+        Pengeluaran::create($validated);
 
-        return redirect()->route('admin.pengeluaran.index');
+        return redirect()->route('admin.pengeluaran.index')
+            ->with('success', 'Pengeluaran berhasil ditambahkan');
     }
 
 
