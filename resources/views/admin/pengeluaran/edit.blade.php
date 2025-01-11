@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Edit Pelanggan')
+@section('title', 'Edit Pengeluaran')
 
 @section('content')
     <div>
@@ -8,44 +8,33 @@
         </h2>
 
 
-        <form action="{{ route('admin.pelanggan.update', $pelanggan->id) }}" method="POST"
+        <form action="{{ route('admin.pengeluaran.update', $pengeluaran->id) }}" method="POST"
             class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
             @csrf
-            @method('PUT')
             <label class="block text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Nama</span>
+                <span class="text-gray-700 dark:text-gray-400">Keterangan</span>
                 <input
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                    placeholder="Nama" name="nama" type="text" value="{{ $pelanggan->nama }}" />
-                @error('nama')
+                    placeholder="Keterangan" name="keterangan" type="text" value="{{ $pengeluaran->keterangan }}" />
+                @error('keterangan')
                     <span class="text-red-400">{{ $message }}</span>
                 @enderror
             </label>
+            <label for="nominal" class="mt-4 block text-sm text-gray-700 dark:text-gray-400">Nominal (IDR):</label>
+            <div class="flex items-center mt-1">
+                <span
+                    class="px-2 py-2 bg-gray-100 border border-gray-300 rounded-l dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">Rp</span>
+                <input type="number" id="nominal" name="nominal" placeholder="Masukkan Nominal"
+                    value="{{ $pengeluaran->nominal }}"
+                    class="w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-r">
+            </div>
             <label class="mt-4 block text-sm">
-                <span class="text-gray-700 dark:text-gray-400">No. Telepon</span>
+                <span class="text-gray-700 dark:text-gray-400">Tanggal Pembelian</span>
                 <input
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                    placeholder="No. Telp" name="no_hp" type="tel" value="{{ $pelanggan->no_hp }}" />
-                @error('no_hp')
-                    <span class="text-red-400">{{ $message }}</span>
-                @enderror
-            </label>
-            <label class="mt-4 block text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Alamat</span>
-                <input
-                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                    placeholder="Alamat" name="alamat" type="text" value="{{ $pelanggan->alamat }}" />
-                @error('password')
-                    <span class="text-red-400">{{ $message }}</span>
-                @enderror
-            </label>
-            <label class="mt-4 block text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Koordinat</span>
-                <input
-                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                    placeholder="https://maps.app.goo.gl/..." name="koordinat" type="text"
-                    value="{{ $pelanggan->koordinat }}" />
-                @error('koordinat')
+                    placeholder="Tanggal Pembelian" name="tgl_pembelian" type="datetime-local"
+                    value="{{ $pengeluaran->tgl_pembelian }}" />
+                @error('tgl_pembelian')
                     <span class="text-red-400">{{ $message }}</span>
                 @enderror
             </label>
