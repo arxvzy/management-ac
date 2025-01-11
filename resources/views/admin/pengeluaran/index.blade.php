@@ -27,7 +27,7 @@
                     <tr>
                         <td>{{ $pengeluaran->tgl_pembelian }}</td>
                         <td>{{ $pengeluaran->keterangan }}</td>
-                        <td>{{ $pengeluaran->nominal }}</td>
+                        <td>Rp {{ $pengeluaran->nominal }}</td>
                         <td>{{ $pengeluaran->pengguna->nama }}</td>
                         <td>
                             <div class="flex items-center space-x-4 text-sm">
