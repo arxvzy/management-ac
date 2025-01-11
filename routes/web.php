@@ -1,11 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PengeluaranController;
 
+    Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('auth.authenticate');
 
+
+
+Route::middleware(['auth'])->group(function () {
     Route::get('/', function () { return view('admin.index'); })->name('admin.home');
 
     Route::get('/pengguna', [PenggunaController::class, 'index'])->name('admin.pengguna.index');
@@ -28,3 +34,4 @@ use App\Http\Controllers\PengeluaranController;
     Route::get('/pengeluaran/{pengeluaran}/edit', [PengeluaranController::class, 'edit'])->name('admin.pengeluaran.edit');
     Route::delete('/pengeluaran/{id}', [PengeluaranController::class, 'destroy'])->name('admin.pengeluaran.hapus');
     Route::put('/pengeluaran/{id}', [PengeluaranController::class, 'update'])->name('admin.pengeluaran.update');
+});
