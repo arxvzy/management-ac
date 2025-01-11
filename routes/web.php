@@ -25,3 +25,6 @@ use App\Http\Controllers\PengeluaranController;
     Route::get('/pengeluaran', [PengeluaranController::class, 'index'])->name('admin.pengeluaran.index');
     Route::get('/pengeluaran/tambah', [PengeluaranController::class, 'create'])->name('admin.pengeluaran.tambah');
     Route::post('/pengeluaran', [PengeluaranController::class, 'store'])->name('admin.pengeluaran.simpan');
+    Route::get('/pengeluaran/{pengeluaran}/edit', [PengeluaranController::class, 'edit'])->name('admin.pengeluaran.edit');
+    Route::delete('/pengeluaran/{id}', [PengeluaranController::class, 'destroy'])->name('admin.pengeluaran.hapus');
+    Route::put('/pengeluaran/{id}', [PengeluaranController::class, 'update'])->name('admin.pengeluaran.update');
