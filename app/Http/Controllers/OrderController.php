@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jasa;
 use App\Models\Order;
+use App\Models\Pengguna;
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -21,7 +24,10 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('admin.order.create');
+        $pelanggans = Pelanggan::orderBy('nama')->get();
+        $penggunas = Pengguna::where('role', 'teknisi')->orderBy('nama')->get();
+        $jasas = Jasa::orderBy('jasa')->get();
+        return view('admin.order.tambah', compact('pelanggans', 'penggunas', 'jasas'));
     }
 
     /**
@@ -32,12 +38,15 @@ class OrderController extends Controller
         $validated = $request->validate([
             'id_jasa' => 'required',
             'id_pelanggan' => 'required',
-            'jadwal' => 'required|date',
+            'jadwal' => 'required',
             'metode_pembayaran' => 'required',
             'harga_awal' => "required|numeric",
             'harga_akhir' => "required|numeric",
         ]);
-
+        
+        if ($request->has('id_pengguna')) {
+            $validated['id_pengguna'] = $request->id_pengguna;
+        }
         Order::create($validated);
 
         return redirect()->route('admin.order.index');
@@ -66,18 +75,14 @@ class OrderController extends Controller
             'harga_akhir' => "required|numeric",
         ]);
 
-        if($request->has('id_pengguna')){
+        if ($request->has('id_pengguna')) {
             $validated['id_pengguna'] = $request->id_pengguna;
         }
-        if($request->has('status')){
+        if ($request->has('status')) {
             $validated['status'] = $request->status;
-            if($request->status == 'selesai'){
+            if ($request->status == 'selesai') {
                 $validated['tgl_pengerjaan'] = now();
             }
-        }
-
-        if($request->has('testimoni')){
-            $validated['testimoni'] = $request->testimoni;
         }
 
         $order->update($validated);
@@ -93,5 +98,4 @@ class OrderController extends Controller
         $order->delete();
         return redirect()->route('admin.order.index');
     }
-
 }
