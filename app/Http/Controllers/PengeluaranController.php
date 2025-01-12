@@ -56,7 +56,7 @@ class PengeluaranController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pengeluaran $id)
+    public function update(Request $request, Pengeluaran $pengeluaran)
     {
         $validated = $request->validate([
             'keterangan' => 'required',
@@ -64,7 +64,7 @@ class PengeluaranController extends Controller
             'tgl_pembelian' => 'required|date',
         ]);
 
-        $id->update($validated);
+        $pengeluaran->update($validated);
 
         return redirect()->route('admin.pengeluaran.index');
     }
@@ -72,9 +72,9 @@ class PengeluaranController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pengeluaran $id)
+    public function destroy(Pengeluaran $pengeluaran)
     {
-        $id->delete();
+        $pengeluaran->delete();
         return redirect()->route('admin.pengeluaran.index');
     }
 }

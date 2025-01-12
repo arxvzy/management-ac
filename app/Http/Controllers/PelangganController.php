@@ -54,7 +54,7 @@ class PelangganController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pelanggan $id)
+    public function update(Request $request, Pelanggan $pelanggan)
     {
         $validated = $request->validate([
         'nama' => 'required|string|max:255', 
@@ -63,16 +63,16 @@ class PelangganController extends Controller
         'koordinat' => 'required'
         ]);
 
-        $id->update($validated);
+        $pelanggan->update($validated);
         return redirect()->route('admin.pelanggan.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pelanggan $id)
+    public function destroy(Pelanggan $pelanggan)
     {
-        $id->delete();
+        $pelanggan->delete();
         return redirect()->route('admin.pelanggan.index');
     }
 }

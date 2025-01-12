@@ -51,16 +51,15 @@ class PenggunaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(int $id)
+    public function edit(Pengguna $pengguna)
     {
-        $pengguna = Pengguna::findOrFail($id);
         return view('admin.pengguna.edit', compact('pengguna'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, Pengguna $pengguna)
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255', 
@@ -69,7 +68,6 @@ class PenggunaController extends Controller
             'role' => 'required'
             ]);
 
-        $pengguna = Pengguna::findOrFail($id);
         $validated['password'] = bcrypt($request->password);
         $pengguna->update($validated);
         return redirect()->route('admin.pengguna.index');
@@ -78,10 +76,9 @@ class PenggunaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(Pengguna $pengguna)
     {
-        $user = Pengguna::findOrFail($id);
-        $user->delete();
+        $pengguna->delete();
         return redirect()->route('admin.pengguna.index');
     }
 }
