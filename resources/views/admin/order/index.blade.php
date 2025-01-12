@@ -66,7 +66,7 @@
                 paging: false,
                 responsive: true,
                 columnDefs: [{
-                    targets: [4, 3, 1],
+                    targets: [7],
                     orderable: false,
                 }, ],
             });
