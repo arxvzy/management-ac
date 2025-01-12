@@ -12,7 +12,8 @@ class JasaController extends Controller
      */
     public function index()
     {
-        return view('admin.jasa.index');
+        $jasas = Jasa::all();
+        return view('admin.jasa.index', compact('jasas'));
     }
 
     /**
@@ -20,7 +21,7 @@ class JasaController extends Controller
      */
     public function create()
     {
-        return view('admin.jasa.create');
+        return view('admin.jasa.tambah');
     }
 
     /**
@@ -34,6 +35,9 @@ class JasaController extends Controller
         ]);
 
         Jasa::create($validated);
+
+        return redirect()->route('admin.jasa.index')
+            ->with('success', 'Jasa berhasil ditambahkan');
     }
 
 
