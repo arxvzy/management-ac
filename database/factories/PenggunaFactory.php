@@ -2,20 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Models\Pengguna;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pengguna>
  */
 class PenggunaFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password;
-
+    protected $model = Pengguna::class;
     /**
      * Define the model's default state.
      *
@@ -24,12 +19,11 @@ class PenggunaFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->name(),
-            'username' => fake()->userName(),
-            'is_active' => true,
-            'password' => Hash::make('12345678'),
+            'nama' => $this->faker->name,
+            'username' => $this->faker->unique()->userName,
+            'password' => bcrypt('123456'),
+            'is_active' => $this->faker->boolean,
+            'role' => $this->faker->randomElement(['admin', 'teknisi']),
         ];
     }
-
-    
 }
