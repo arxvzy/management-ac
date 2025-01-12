@@ -2,9 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Pengguna;
+use App\Models\Jasa;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Order;
+use App\Models\Pengguna;
+use App\Models\Pelanggan;
+use App\Models\Pengeluaran;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,14 +18,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
         Pengguna::factory()->create([
-            'nama' => 'Init Admin',
-            'username' => 'initadmin',
-            'password' => bcrypt('123456'),
+            'nama' => 'Admin',
+            'username' => 'admin',
+            'password' => bcrypt('admin'),
             'role' => 'admin',
             'is_active' => true
         ]);
+
+        Pelanggan::factory(20)->create();
+        Jasa::factory(3)->create();
+        Pengeluaran::factory(30)->create();
+        Order::factory(20)->create();
     }
 }
