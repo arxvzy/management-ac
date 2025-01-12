@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    use HasFactory;
     protected $table = 'order';
 
     protected $fillable = [
@@ -28,11 +30,11 @@ class Order extends Model
 
     public function jasa()
     {
-        return $this->belongsTo(Jasa::class);
+        return $this->belongsTo(Jasa::class, 'id_jasa');
     }
 
     public function pelanggan()
     {
-        return $this->belongsTo(Pelanggan::class);
+        return $this->belongsTo(Pelanggan::class, 'id_pelanggan');
     }
 }
