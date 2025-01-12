@@ -45,4 +45,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/jasa/{jasa}', [JasaController::class, 'update'])->name('admin.jasa.update');
 
     Route::get('/order', [OrderController::class, 'index'])->name('admin.order.index');
+    Route::get('/order/tambah', [OrderController::class, 'create'])->name('admin.order.tambah');
+    Route::post('/order', [OrderController::class, 'store'])->name('admin.order.simpan');
+    Route::get('/order/{order}/edit', [OrderController::class, 'edit'])->name('admin.order.edit');
+    Route::delete('/order/{order}', [OrderController::class, 'destroy'])->name('admin.order.hapus');
+    Route::put('/order/{order}', [OrderController::class, 'update'])->name('admin.order.update');
 });
