@@ -11,6 +11,7 @@
         <form action="{{ route('admin.pengeluaran.update', $pengeluaran->id) }}" method="POST"
             class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
             @csrf
+            @method('PUT')
             <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Keterangan</span>
                 <input
@@ -39,7 +40,6 @@
                 @enderror
             </label>
             <x-button class="mt-6 py-3" type="submit">Simpan</x-button>
-    </div>
-    </form>
+        </form>
     </div>
 @endsection

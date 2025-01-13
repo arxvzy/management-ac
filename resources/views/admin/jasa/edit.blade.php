@@ -32,7 +32,6 @@
             </label>
 
             <x-button class="mt-6 py-3" type="submit">Simpan</x-button>
-    </div>
-    </form>
+        </form>
     </div>
 @endsection

@@ -78,22 +78,6 @@
             </label>
             <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
-                    Metode Pembayaran
-                </span>
-                <select
-                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                    name="metode_pembayaran">
-                    <option disabled selected>Pilih Metode Pembayaran</option>
-                    <option value="COD" {{ old('metode_pembayaran') == 'COD' ? 'selected' : '' }}>COD</option>
-                    <option value="Transfer" {{ old('metode_pembayaran') == 'Transfer' ? 'selected' : '' }}>Transfer
-                    </option>
-                </select>
-                @error('metode_pembayaran')
-                    <span class="text-red-400">{{ $message }}</span>
-                @enderror
-            </label>
-            <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">
                     Nama Teknisi
                 </span>
                 <select
