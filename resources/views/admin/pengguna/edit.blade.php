@@ -29,16 +29,6 @@
                     <span class="text-red-400">{{ $message }}</span>
                 @enderror
             </label>
-            <label class="mt-4 block text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Password</span>
-                <input
-                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                    placeholder="***" name="password" type="password" />
-                @error('password')
-                    <span class="text-red-400">{{ $message }}</span>
-                @enderror
-            </label>
-
             <div class="mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                     Jenis Akun
@@ -54,7 +44,7 @@
                     <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
                         <input type="radio"
                             class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                            name="role" value="pengguna"
+                            name="role" value="teknisi"
                             {{ old('role', $pengguna->role ?? '') === 'teknisi' ? 'checked' : '' }} />
                         <span class="ml-2">Teknisi</span>
                     </label>
