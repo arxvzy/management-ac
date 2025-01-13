@@ -18,11 +18,12 @@ return new class extends Migration
             $table->unsignedBigInteger('id_pelanggan');
             $table->date('jadwal');
             $table->float('harga_awal');
-            $table->float('harga_akhir');
-            $table->string('metode_pembayaran');
+            $table->float('harga_akhir')->nullable();
+            $table->string('metode_pembayaran')->nullable();
             $table->dateTime('tgl_pengerjaan')->nullable();
             $table->string('status')->nullable();
-            $table->text('testimoni')->nullable();     
+            $table->text('testimoni')->nullable(); 
+            $table->text('deskripsi')->nullable();  
             $table->timestamps();
 
             $table->foreign('id_jasa')->references('id')->on('jasa');
