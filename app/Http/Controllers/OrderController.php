@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->get();
+        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->orderBy('created_at', 'desc')->get();
         return view('admin.order.index', compact('orders'));
     }
 
@@ -39,9 +39,7 @@ class OrderController extends Controller
             'id_jasa' => 'required',
             'id_pelanggan' => 'required',
             'jadwal' => 'required',
-            'metode_pembayaran' => 'required',
             'harga_awal' => "required|numeric",
-            'harga_akhir' => "required|numeric",
         ]);
         
         if ($request->has('id_pengguna')) {
@@ -73,21 +71,13 @@ class OrderController extends Controller
             'id_jasa' => 'required',
             'id_pelanggan' => 'required',
             'jadwal' => 'required|date',
-            'metode_pembayaran' => 'required',
             'harga_awal' => "required|numeric",
-            'harga_akhir' => "required|numeric",
         ]);
 
         if ($request->has('id_pengguna')) {
             $validated['id_pengguna'] = $request->id_pengguna;
         }
-        if ($request->has('status')) {
-            $validated['status'] = $request->status;
-            if ($request->status == 'selesai') {
-                $validated['tgl_pengerjaan'] = now();
-            }
-        }
-
+        
         $order->update($validated);
 
         return redirect()->route('admin.order.index');
