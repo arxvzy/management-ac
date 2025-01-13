@@ -18,9 +18,7 @@
                     <th>Jasa</th>
                     <th>Pelanggan</th>
                     <th>Harga Awal</th>
-                    <th>Harga Akhir</th>
                     <th>Teknisi</th>
-                    <th>Metode Pembayaran</th>
                     <th>Jadwal</th>
                     <th></th>
                 </tr>
@@ -31,9 +29,7 @@
                         <td>{{ $order->jasa->jasa }}</td>
                         <td>{{ $order->pelanggan->nama }}</td>
                         <td>{{ $order->harga_awal }}</td>
-                        <td>{{ $order->harga_akhir }}</td>
                         <td>{{ $order->pengguna->nama }}</td>
-                        <td>{{ $order->metode_pembayaran }}</td>
                         <td>{{ $order->jadwal }}</td>
                         <td>
                             <div class="flex items-center space-x-4 text-sm">
@@ -65,8 +61,9 @@
                 info: false,
                 paging: false,
                 responsive: true,
+                order: [],
                 columnDefs: [{
-                    targets: [7],
+                    targets: [5],
                     orderable: false,
                 }, ],
             });
