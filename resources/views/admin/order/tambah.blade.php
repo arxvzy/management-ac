@@ -56,17 +56,6 @@
             @error('harga_awal')
                 <span class="text-red-400">{{ $message }}</span>
             @enderror
-            <label class="mt-4 block text-sm text-gray-700 dark:text-gray-400">Harga Akhir (IDR)</label>
-            <div class="flex items-center mt-1">
-                <span
-                    class="px-2 py-2 bg-gray-100 border border-gray-300 rounded-l dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">Rp</span>
-                <input type="number" id="harga_akhir" name="harga_akhir" placeholder="Harga Akhir"
-                    value="{{ old('harga_akhir') }}"
-                    class="w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-r">
-            </div>
-            @error('harga_akhir')
-                <span class="text-red-400">{{ $message }}</span>
-            @enderror
             <label class="mt-4 block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Jadwal</span>
                 <input
