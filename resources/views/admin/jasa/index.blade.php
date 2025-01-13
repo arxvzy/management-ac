@@ -54,6 +54,7 @@
             $('#jasaTable').DataTable({
                 info: false,
                 paging: false,
+                order: [],
                 responsive: true,
                 columnDefs: [{
                     targets: [1, 2],
