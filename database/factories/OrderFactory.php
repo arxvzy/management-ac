@@ -26,12 +26,13 @@ class OrderFactory extends Factory
             'id_pengguna' => Pengguna::factory(),
             'id_pelanggan' => Pelanggan::factory(),
             'jadwal' => $this->faker->date('Y-m-d', now()->addDays()),
-            'metode_pembayaran' => $this->faker->randomElement(['COD', 'Transfer']),
+            'metode_pembayaran' => $this->faker->randomElement(['Tunai', 'Transfer']),
             'harga_awal' => $this->faker->numberBetween(10000, 50000),
             'harga_akhir' => $this->faker->numberBetween(50000, 100000),
             'tgl_pengerjaan' => $this->faker->optional()->dateTimeBetween('+2 days', '+1 months'),
-            'status' => $this->faker->randomElement(['Menunggu', 'Proses', 'Selesai', 'Batal']),
+            'status' => $this->faker->randomElement(['Selesai', 'Batal']),
             'testimoni' => $this->faker->optional()->sentence,
+            'deskripsi' => $this->faker->sentence()
         ];
     }
 }
