@@ -59,6 +59,7 @@
                 info: false,
                 responsive: true,
                 paging: false,
+                order: [],
                 columnDefs: [{
                     targets: [1, 4],
                     orderable: false,
