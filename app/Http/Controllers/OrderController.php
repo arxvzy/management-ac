@@ -58,7 +58,10 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('admin.order.edit', compact('order'));
+        $pelanggans = Pelanggan::orderBy('nama')->get();
+        $penggunas = Pengguna::where('role', 'teknisi')->orderBy('nama')->get();
+        $jasas = Jasa::orderBy('jasa')->get();
+        return view('admin.order.edit', compact('order','pelanggans', 'penggunas', 'jasas'));
     }
 
     /**
