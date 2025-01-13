@@ -64,7 +64,6 @@ class PenggunaController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255', 
             'username' => 'required|max:16',
-            'password' => 'required|min:6',
             'role' => 'required'
             ]);
 
