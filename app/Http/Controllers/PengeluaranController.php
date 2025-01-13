@@ -13,7 +13,7 @@ class PengeluaranController extends Controller
      */
     public function index()
     {
-        $pengeluarans = Pengeluaran::with('pengguna')->get();
+        $pengeluarans = Pengeluaran::with('pengguna')->orderBy('created_at', 'desc')->get();
         return view('admin.pengeluaran.index', compact('pengeluarans'));
     }
 
