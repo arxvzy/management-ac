@@ -6,6 +6,7 @@ use App\Http\Controllers\JasaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PenugasanController;
 use App\Http\Controllers\PengeluaranController;
 
     Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
@@ -15,6 +16,7 @@ use App\Http\Controllers\PengeluaranController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () { return view('admin.index'); })->name('admin.home');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
     Route::get('/pengguna', [PenggunaController::class, 'index'])->name('admin.pengguna.index');
     Route::get('/pengguna/tambah', [PenggunaController::class, 'create'])->name('admin.pengguna.tambah');
@@ -50,4 +52,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/order/{order}/edit', [OrderController::class, 'edit'])->name('admin.order.edit');
     Route::delete('/order/{order}', [OrderController::class, 'destroy'])->name('admin.order.hapus');
     Route::put('/order/{order}', [OrderController::class, 'update'])->name('admin.order.update');
+
+    Route::get('/penugasan', [PenugasanController::class, 'index'])->name('admin.penugasan.index');
+    Route::put('/penugasan/{order}', [PenugasanController::class, 'update'])->name('admin.penugasan.update');
+    Route::get('/penugasan/{order}/edit', [PenugasanController::class, 'edit'])->name('admin.penugasan.edit');
+
 });
