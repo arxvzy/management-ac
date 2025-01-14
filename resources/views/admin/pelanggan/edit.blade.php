@@ -25,7 +25,7 @@
                 <span class="text-gray-700 dark:text-gray-400">No. Telepon</span>
                 <input
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                    placeholder="No. Telp" name="no_hp" type="tel" value="{{ $pelanggan->no_hp }}" />
+                    placeholder="62xxx" name="no_hp" type="tel" value="{{ $pelanggan->no_hp }}" />
                 @error('no_hp')
                     <span class="text-red-400">{{ $message }}</span>
                 @enderror
