@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jasa;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class PenugasanController extends Controller
@@ -60,6 +61,10 @@ class PenugasanController extends Controller
         }
         if ($request->has('status')) {
             $order['status'] = $request->status;
+            if ($request->status == 'Selesai') {
+                $order['tgl_pengerjaan'] = now();
+                $order->pelanggan->update(['is_reminded' => false]);
+            }
         }
         $order->save();
         return redirect()->route('admin.penugasan.index');
