@@ -8,6 +8,7 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenugasanController;
 use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\PengingatController;
 
     Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('auth.authenticate');
@@ -59,4 +60,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/penugasan/{order}', [PenugasanController::class, 'update'])->name('admin.penugasan.update');
     Route::get('/penugasan/{order}/edit', [PenugasanController::class, 'edit'])->name('admin.penugasan.edit');
 
+    Route::get('/pengingat', [PengingatController::class, 'index'])->name('admin.pengingat.index');
+    Route::post('/pengingat/{pelanggan}', [PengingatController::class, 'update'])->name('admin.pengingat.kirim');
 });
