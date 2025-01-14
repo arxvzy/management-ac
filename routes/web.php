@@ -17,6 +17,8 @@ use App\Http\Controllers\PengeluaranController;
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () { return view('admin.index'); })->name('admin.home');
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::get('/pengguna/{pengguna}/reset', [AuthController::class, 'reset'])->name('auth.reset');
+    Route::put('/pengguna/{pengguna}/reset', [AuthController::class, 'update'])->name('auth.update');
 
     Route::get('/pengguna', [PenggunaController::class, 'index'])->name('admin.pengguna.index');
     Route::get('/pengguna/tambah', [PenggunaController::class, 'create'])->name('admin.pengguna.tambah');
