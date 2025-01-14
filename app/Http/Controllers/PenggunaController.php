@@ -36,12 +36,8 @@ class PenggunaController extends Controller
         'role' => 'required'
         ]);
 
-        $pengguna = new Pengguna();
-        $pengguna->nama = $request->nama;
-        $pengguna->username = $request->username;
-        $pengguna->password = bcrypt($request->password);
-        $pengguna->role = $request->role;
-        $pengguna->save();
+        $validated['password'] = bcrypt($request->password);
+        Pengguna::create($validated);
 
 
         return redirect()->route('admin.pengguna.index')
@@ -67,7 +63,6 @@ class PenggunaController extends Controller
             'role' => 'required'
             ]);
 
-        $validated['password'] = bcrypt($request->password);
         $pengguna->update($validated);
         return redirect()->route('admin.pengguna.index');
     }
@@ -80,4 +75,5 @@ class PenggunaController extends Controller
         $pengguna->delete();
         return redirect()->route('admin.pengguna.index');
     }
+
 }
