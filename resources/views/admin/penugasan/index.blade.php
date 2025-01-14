@@ -10,10 +10,12 @@
                 <tr>
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
+                    <th>No. HP</th>
                     <th>Jasa</th>
                     <th>Teknisi</th>
                     <th>Status</th>
                     <th>Metode Pembayaran</th>
+                    <th>Tanggal Pengerjaan</th>
                     <th></th>
                 </tr>
             </thead>
@@ -22,6 +24,7 @@
                     <tr>
                         <td>{{ $order->pelanggan->nama }}</td>
                         <td>{{ $order->pelanggan->koordinat }}</td>
+                        <td>{{ $order->pelanggan->no_hp }}</td>
                         <td>{{ $order->jasa->jasa }}</td>
                         <td>{{ $order->pengguna->nama }}</td>
                         @if ($order->status == 'Selesai' || $order->status == 'Batal')
@@ -35,6 +38,7 @@
                             <td></td>
                         @endif
                         <td>{{ $order->metode_pembayaran }}</td>
+                        <td>{{ \Carbon\Carbon::parse($order->tgl_pengerjaan)->translatedFormat('l, j F Y H:i') }}</td>
                         <td>
                             <a href="{{ route('admin.penugasan.edit', $order->id) }}"
                                 class="flex items-center justify-start px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray "
@@ -55,7 +59,7 @@
                 responsive: true,
                 order: [],
                 columnDefs: [{
-                    targets: [1, 3, 6],
+                    targets: [1, 3, 7],
                     orderable: false,
                 }],
             });

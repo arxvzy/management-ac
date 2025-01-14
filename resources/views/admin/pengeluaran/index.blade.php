@@ -25,7 +25,7 @@
             <tbody>
                 @foreach ($pengeluarans as $pengeluaran)
                     <tr>
-                        <td>{{ $pengeluaran->tgl_pembelian }}</td>
+                        <td>{{ \Carbon\Carbon::parse($pengeluaran->tgl_pembelian)->translatedFormat('l, j F Y H:i') }}</td>
                         <td>{{ $pengeluaran->keterangan }}</td>
                         <td>Rp {{ $pengeluaran->nominal }}</td>
                         <td>{{ $pengeluaran->pengguna->nama }}</td>

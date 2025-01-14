@@ -30,7 +30,7 @@
                         <td>{{ $order->pelanggan->nama }}</td>
                         <td>{{ $order->harga_awal }}</td>
                         <td>{{ $order->pengguna->nama }}</td>
-                        <td>{{ $order->jadwal }}</td>
+                        <td>{{ \Carbon\Carbon::parse($order->jadwal)->translatedFormat('l, F j, Y') }}</td>
                         <td>
                             <div class="flex items-center space-x-4 text-sm">
                                 <a href="{{ route('admin.order.edit', $order->id) }}"
