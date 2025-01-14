@@ -53,6 +53,6 @@ class PengingatController extends Controller
             $encodedMessage = urlencode($message);
 
         $whatsAppUrl = "https://wa.me/{$pelanggan->no_hp}?text={$encodedMessage}";
-        return redirect()->away($whatsAppUrl);
+        return view('admin.pengingat.redirect', ['url' => $whatsAppUrl]);
     }
 }
