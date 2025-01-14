@@ -32,7 +32,7 @@ class PelangganController extends Controller
         $validated = $request->validate([
         'nama' => 'required|string|max:255', 
         'alamat' => 'required',
-        'no_hp' => 'required',
+        'no_hp' => 'required|numeric',
         'koordinat' => 'required'
         ]);
 
