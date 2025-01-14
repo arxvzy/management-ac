@@ -72,6 +72,11 @@
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-red-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                                             <x-heroicon-s-trash class="w-5 h-5" />
                                         </button>
+                                        <a href="{{ route('auth.reset', $user->id) }}"
+                                            class="flex items-center justify-start px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray "
+                                            aria-label="Reset Password">
+                                            <x-heroicon-s-key class="w-5 h-5" />
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

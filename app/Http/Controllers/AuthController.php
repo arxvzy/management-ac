@@ -22,7 +22,7 @@ class AuthController extends Controller
 
         $remember = false;
 
-        if($request->has('remember')) {
+        if ($request->has('remember')) {
             $remember = true;
         }
 
@@ -41,5 +41,21 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+
+    public function reset(Pengguna $pengguna)
+    {
+        return view('admin.pengguna.reset', compact('pengguna'));
+    }
+
+    public function update(Request $request, Pengguna $pengguna)
+    {
+        $validated = $request->validate([
+            'password' => 'required|min:6|confirmed',
+        ]);
+        $validated['password'] = bcrypt($request->password);
+
+        $pengguna->update($validated);
+        return redirect()->route('admin.pengguna.index');
     }
 }
