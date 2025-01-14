@@ -13,11 +13,12 @@ class Pelanggan extends Model
         'nama',
         'no_hp',
         'alamat',
-        'koordinat'
+        'koordinat',
+        'is_reminded'
     ];
 
     public function order()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'id_pelanggan');
     }
 }
