@@ -17,20 +17,10 @@ class PenugasanController extends Controller
     {
         $user = Auth::user();
         if ($user->role == 'teknisi') {
-            $orders = Order::query()
-                ->orderByRaw("CASE 
-        WHEN status IS NULL OR status = '' THEN 0 
-        WHEN status = 'Selesai' THEN 1 
-        WHEN status = 'Batal' THEN 2 
-    END")->where('id_pengguna', $user->id)->get();
+            $orders = Order::where('id_pengguna', $user->id)
+                ->whereNull('status')->get();
         } else {
-            $orders = Order::query()
-                ->orderByRaw("CASE 
-        WHEN status IS NULL OR status = '' THEN 0 
-        WHEN status = 'Selesai' THEN 1 
-        WHEN status = 'Batal' THEN 2 
-    END")
-                ->get();
+            $orders = Order::whereNull('status')->get();
         }
         return view('admin.penugasan.index', compact('orders'));
     }
@@ -62,9 +52,9 @@ class PenugasanController extends Controller
         if ($request->has('status')) {
             $order['status'] = $request->status;
             if ($request->status == 'Selesai') {
-                $order['tgl_pengerjaan'] = now();
                 $order->pelanggan->update(['is_reminded' => false]);
             }
+            $order['tgl_pengerjaan'] = now();
         }
         $order->save();
         return redirect()->route('admin.penugasan.index');
