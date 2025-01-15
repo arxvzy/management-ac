@@ -27,7 +27,7 @@
                     <tr>
                         <td>{{ \Carbon\Carbon::parse($pengeluaran->tgl_pembelian)->translatedFormat('l, j F Y H:i') }}</td>
                         <td>{{ $pengeluaran->keterangan }}</td>
-                        <td>Rp {{ $pengeluaran->nominal }}</td>
+                        <td>Rp {{ number_format($pengeluaran->nominal) }}</td>
                         <td>{{ $pengeluaran->pengguna->nama }}</td>
                         <td>
                             <div class="flex items-center space-x-4 text-sm">

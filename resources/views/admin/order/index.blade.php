@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ $order->jasa->jasa }}</td>
                         <td>{{ $order->pelanggan->nama }}</td>
-                        <td>{{ $order->harga_awal }}</td>
+                        <td>Rp {{ number_format($order->harga_awal) }}</td>
                         <td>{{ $order->pengguna->nama }}</td>
                         <td>{{ \Carbon\Carbon::parse($order->jadwal)->translatedFormat('l, F j, Y') }}</td>
                         <td>
