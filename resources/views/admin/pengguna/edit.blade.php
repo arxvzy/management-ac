@@ -37,19 +37,39 @@
                     <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
                         <input type="radio"
                             class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                            name="role" value="admin"
-                            {{ old('role', $pengguna->role ?? '') === 'admin' ? 'checked' : '' }} />
+                            name="role" value="admin" {{ $pengguna->role == 'admin' ? 'checked' : '' }} />
                         <span class="ml-2">Admin</span>
                     </label>
                     <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
                         <input type="radio"
                             class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                            name="role" value="teknisi"
-                            {{ old('role', $pengguna->role ?? '') === 'teknisi' ? 'checked' : '' }} />
+                            name="role" value="teknisi" {{ $pengguna->role == 'teknisi' ? 'checked' : '' }} />
                         <span class="ml-2">Teknisi</span>
                     </label>
                 </div>
                 @error('role')
+                    <span class="text-red-400">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">
+                    Status Pengguna
+                </span>
+                <div class="mt-2">
+                    <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
+                        <input type="radio"
+                            class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                            name="is_active" value="1" {{ $pengguna->is_active == true ? 'checked' : '' }} />
+                        <span class="ml-2">Aktif</span>
+                    </label>
+                    <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
+                        <input type="radio"
+                            class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                            name="is_active" value="0" {{ $pengguna->is_active == false ? 'checked' : '' }} />
+                        <span class="ml-2">Tidak Aktif</span>
+                    </label>
+                </div>
+                @error('is_active')
                     <span class="text-red-400">{{ $message }}</span>
                 @enderror
             </div>

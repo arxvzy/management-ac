@@ -60,7 +60,8 @@ class PenggunaController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255', 
             'username' => 'required|max:16',
-            'role' => 'required'
+            'role' => 'required',
+            'is_active' => 'required|boolean'
             ]);
 
         $pengguna->update($validated);
