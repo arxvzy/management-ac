@@ -9,6 +9,7 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PengingatController;
 use App\Http\Controllers\PenugasanController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\PengeluaranController;
 
     Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
@@ -62,8 +63,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/penugasan/{order}/edit', [PenugasanController::class, 'edit'])->name('admin.penugasan.edit');
 
     Route::get('/pengingat', [PengingatController::class, 'index'])->name('admin.pengingat.index');
-    Route::post('/pengingat/{pelanggan}', [PengingatController::class, 'update'])->name('admin.pengingat.kirim');
+    Route::put('/pengingat/{pelanggan}', [PengingatController::class, 'update'])->name('admin.pengingat.kirim');
 
     Route::get('/history', [HistoryController::class, 'index'])->name('admin.history.index');
     Route::get('/history/{order}', [HistoryController::class, 'show'])->name('admin.history.show');
-});
+
+    Route::get('/survey', [SurveyController::class, 'adminIndex'])->name('admin.survey.index');
+    Route::put('/survey/{order}', [SurveyController::class, 'adminUpdate'])->name('admin.survey.kirim');
+    });
+Route::get('/survey/{order}', [SurveyController::class, 'clientIndex'])->name('survey.show');
+Route::put('/survey/{order}/review', [SurveyController::class, 'clientUpdate'])->name('survey.simpan');
