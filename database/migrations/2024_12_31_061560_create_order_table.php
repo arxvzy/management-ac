@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('metode_pembayaran')->nullable();
             $table->dateTime('tgl_pengerjaan')->nullable();
             $table->string('status')->nullable();
+            $table->boolean('is_survey_sent')->default(false);
             $table->text('testimoni')->nullable(); 
             $table->text('deskripsi')->nullable();  
             $table->timestamps();
