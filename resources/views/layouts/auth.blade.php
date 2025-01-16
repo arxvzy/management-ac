@@ -10,7 +10,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="h-full">
+<body class="min-h-screen flex items-center justify-center p-4">
     @yield('content')
 </body>
 
