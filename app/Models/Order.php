@@ -20,7 +20,9 @@ class Order extends Model
         'harga_akhir',
         'tgl_pengerjaan',
         'status',
-        'testimoni'
+        'testimoni',
+        'deskripsi',
+        'is_survey_sent'
     ];
 
     public function pengguna()
