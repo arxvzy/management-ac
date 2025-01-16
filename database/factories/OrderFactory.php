@@ -31,6 +31,7 @@ class OrderFactory extends Factory
             'harga_akhir' => $this->faker->numberBetween(50000, 100000),
             'tgl_pengerjaan' => $this->faker->optional()->dateTimeBetween('-100 days', '-80 days'),
             'status' => $this->faker->randomElement(['Selesai', 'Batal']),
+            'is_survey_sent' => $this->faker->boolean(),
             'testimoni' => $this->faker->optional()->sentence,
             'deskripsi' => $this->faker->sentence()
         ];
