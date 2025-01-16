@@ -47,12 +47,12 @@ class PengingatController extends Controller
         $pelanggan->is_reminded = true;
         $pelanggan->save();
 
-        $message = "Halo, {$pelanggan->nama}\n\n" .
+        $message = "Halo, $pelanggan->nama\n\n" .
             "Kami ingin menginformasikan bahwa saat ini sudah waktunya servis/cuci AC demi menjaga kualitas udara tetap bersih dan sehat.";
 
             $encodedMessage = urlencode($message);
 
         $whatsAppUrl = "https://wa.me/{$pelanggan->no_hp}?text={$encodedMessage}";
-        return view('admin.pengingat.redirect', ['url' => $whatsAppUrl]);
+        return view('admin.survey.redirect', ['url' => $whatsAppUrl]);
     }
 }
