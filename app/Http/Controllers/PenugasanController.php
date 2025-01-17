@@ -40,23 +40,19 @@ class PenugasanController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        if ($request->has('deskripsi')) {
-            $order['deskripsi'] = $request->deskripsi;
+        $validated = $request->validate([
+            'deskripsi' => 'required',
+            'harga_akhir' => 'required|numeric',
+            'metode_pembayaran' => 'required',
+            'status' => 'required',
+        ]);
+        
+        if ($request->status == 'Selesai') {
+            $order->pelanggan->update(['is_reminded' => false]);
         }
-        if ($request->has('harga_akhir')) {
-            $order['harga_akhir'] = $request->harga_akhir;
-        }
-        if ($request->has('metode_pembayaran')) {
-            $order['metode_pembayaran'] = $request->metode_pembayaran;
-        }
-        if ($request->has('status')) {
-            $order['status'] = $request->status;
-            if ($request->status == 'Selesai') {
-                $order->pelanggan->update(['is_reminded' => false]);
-            }
-            $order['tgl_pengerjaan'] = now();
-        }
-        $order->save();
+
+        $validated['tgl_pengerjaan'] = now();
+        $order->update($validated);
         return redirect()->route('admin.penugasan.index');
     }
 }
