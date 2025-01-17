@@ -38,7 +38,10 @@
                 <span class="text-gray-700 dark:text-gray-400">Deskripsi Pengerjaan</span>
                 <textarea
                     class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                    rows="3" placeholder="Masukkan Deskripsi Pengerjaan" value="{{ $order->deskripsi }}" name="deskripsi"></textarea>
+                    rows="3" placeholder="Masukkan deskripsi" name="deskripsi">{{ $order->deskripsi }}</textarea>
+                @error('deskripsi')
+                    <span class="text-red-400">{{ $message }}</span>
+                @enderror
             </label>
             <label class="mt-4 block text-sm text-gray-700 dark:text-gray-400">Harga Akhir (IDR)</label>
             <div class="flex items-center mt-1">
@@ -49,7 +52,7 @@
                     class="w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-r">
             </div>
             @error('harga_akhir')
-                <span class="text-red-400">{{ $message }}</span>
+                <span class="text-red-400 text-sm">{{ $message }}</span>
             @enderror
             <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
@@ -63,6 +66,9 @@
                     <option value="Transfer" {{ $order->metode_pembayaran == 'Transfer' ? 'selected' : '' }}>Transfer Bank
                     </option>
                 </select>
+                @error('metode_pembayaran')
+                    <span class="text-red-400">{{ $message }}</span>
+                @enderror
             </label>
             <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
@@ -75,6 +81,9 @@
                     <option value="Selesai" {{ $order->status == 'Selesai' ? 'selected' : '' }}>Selesai</option>
                     <option value="Batal" {{ $order->status == 'Batal' ? 'selected' : '' }}>Batal</option>
                 </select>
+                @error('status')
+                    <span class="text-red-400">{{ $message }}</span>
+                @enderror
             </label>
             <x-button class="mt-6 py-3" type="submit">Simpan</x-button>
         </form>
