@@ -6,9 +6,10 @@
             Pengingat Service
         </h2>
 
-        <table id="pengingatTable" class="display">
+        <table id="pengingatTable" class="display dark:text-gray-400">
             <thead>
-                <tr>
+                <tr
+                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
                     <th>No. HP</th>
@@ -17,16 +18,16 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                 @foreach ($pelanggans as $pelanggan)
-                    <tr>
+                    <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $pelanggan->nama }}</td>
                         <td>{{ $pelanggan->koordinat }}</td>
                         <td>{{ $pelanggan->no_hp }}</td>
                         <td>{{ \Carbon\Carbon::parse($pelanggan->latest_order_date)->translatedFormat('l, j F Y H:i') }}
                         </td>
                         @if (!$pelanggan->is_reminded)
-                            <td>
+                            <td class="text-xs">
                                 <span
                                     class="px-2 py-1 font-semibold leading-tight  rounded-full text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100">
                                     Belum Diingatkan
@@ -64,11 +65,7 @@
                 info: false,
                 paging: false,
                 responsive: true,
-                order: [],
-                columnDefs: [{
-                    targets: [1, 2, 5],
-                    orderable: false,
-                }],
+                ordering: false
             });
         });
     </script>

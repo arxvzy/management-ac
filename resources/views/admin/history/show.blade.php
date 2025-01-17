@@ -45,7 +45,7 @@
                 </div>
                 <div class="grid grid-cols-1 gap-1 py-2 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Status</dt>
-                    <dd class="text-gray-700 sm:col-span-2"><span
+                    <dd class="text-gray-700 sm:col-span-2 text-xs"><span
                             class="px-2 py-1 font-semibold leading-tight  rounded-full  {{ $order->status == 'Selesai' ? 'text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100' : 'text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100' }}">
                             {{ $order->status }}
                         </span></dd>

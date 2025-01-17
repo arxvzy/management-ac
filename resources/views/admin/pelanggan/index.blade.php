@@ -12,9 +12,10 @@
             <x-button class="py-2" href="{{ route('admin.pelanggan.tambah') }}">Tambah</x-button>
         </h4>
 
-        <table id="pelangganTable" class="display">
+        <table id="pelangganTable" class="display dark:text-gray-400">
             <thead>
-                <tr>
+                <tr
+                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <th>Nama</th>
                     <th>No. HP</th>
                     <th>Alamat</th>
@@ -22,9 +23,9 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                 @foreach ($pelanggan as $user)
-                    <tr>
+                    <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $user->nama }}</td>
                         <td>{{ $user->no_hp }}</td>
                         <td>{{ $user->alamat }}</td>

@@ -6,9 +6,10 @@
             Kirim Survey Pelanggan
         </h2>
 
-        <table id="surveyTable" class="display">
+        <table id="surveyTable" class="display dark:text-gray-400">
             <thead>
-                <tr>
+                <tr
+                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <th>Nama Pelanggan</th>
                     <th>No. HP</th>
                     <th>Tanggal Pengerjaan</th>
@@ -17,18 +18,19 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                 @foreach ($orders as $order)
-                    <tr>
+                    <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $order->pelanggan->nama }}</td>
                         <td>{{ $order->pelanggan->no_hp }}</td>
-                        <td>{{ \Carbon\Carbon::parse($order->tgl_pengerjaan)->translatedFormat('l, j F Y H:i') }}
+                        <td>
+                            {{ \Carbon\Carbon::parse($order->tgl_pengerjaan)->translatedFormat('l, j F Y H:i') }}
                         </td>
                         <td>{{ $order->jasa->jasa }}</td>
-                        <td>
+                        <td class="text-xs">
                             <span
                                 class="px-2 py-1 font-semibold leading-tight  rounded-full text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100">
-                                Belum Diingatkan
+                                Belum dikirim
                             </span>
                         </td>
                         <td>

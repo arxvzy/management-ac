@@ -12,17 +12,18 @@
             <x-button class="py-2" href="{{ route('admin.jasa.tambah') }}">Tambah</x-button>
         </h4>
 
-        <table id="jasaTable" class="display">
+        <table id="jasaTable" class="display dark:text-gray-400">
             <thead>
-                <tr>
+                <tr
+                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <th>Jasa</th>
                     <th>Keterangan</th>
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                 @foreach ($jasas as $jasa)
-                    <tr>
+                    <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $jasa->jasa }}</td>
                         <td>{{ $jasa->keterangan }}</td>
                         <td>
