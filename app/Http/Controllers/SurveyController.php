@@ -27,8 +27,8 @@ class SurveyController extends Controller
         $order->is_survey_sent = true;
         $order->save();
 
-        $message = "Halo, {{$order->pelanggan->nama}}\n\n" .
-            "Jika berkenan, silahkan isi survey di link berikut http:// untuk masukan dan evaluasi atas pekerjaan kami.
+        $message = "Halo, {$order->pelanggan->nama}\n\n" .
+            "Jika berkenan, silahkan isi survey di link berikut " . env('APP_URL') . "/survey/{$order->id} untuk masukan dan evaluasi atas pekerjaan kami.
 ";
 
         $encodedMessage = urlencode($message);
