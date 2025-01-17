@@ -2,14 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JasaController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PengingatController;
 use App\Http\Controllers\PenugasanController;
-use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\PengeluaranController;
 
     Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
@@ -18,7 +19,7 @@ use App\Http\Controllers\PengeluaranController;
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () { return view('admin.index'); })->name('admin.home');
+    Route::get('/',[HomeController::class, 'index'])->name('admin.home');
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/pengguna/{pengguna}/reset', [AuthController::class, 'reset'])->name('auth.reset');
     Route::put('/pengguna/{pengguna}/reset', [AuthController::class, 'update'])->name('auth.update');
@@ -57,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/order/{order}/edit', [OrderController::class, 'edit'])->name('admin.order.edit');
     Route::delete('/order/{order}', [OrderController::class, 'destroy'])->name('admin.order.hapus');
     Route::put('/order/{order}', [OrderController::class, 'update'])->name('admin.order.update');
+    Route::get('/order/{order}', [OrderController::class, 'show'])->name('admin.order.show');
 
     Route::get('/penugasan', [PenugasanController::class, 'index'])->name('admin.penugasan.index');
     Route::put('/penugasan/{order}', [PenugasanController::class, 'update'])->name('admin.penugasan.update');
@@ -66,7 +68,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/pengingat/{pelanggan}', [PengingatController::class, 'update'])->name('admin.pengingat.kirim');
 
     Route::get('/history', [HistoryController::class, 'index'])->name('admin.history.index');
-    Route::get('/history/{order}', [HistoryController::class, 'show'])->name('admin.history.show');
 
     Route::get('/survey', [SurveyController::class, 'adminIndex'])->name('admin.survey.index');
     Route::put('/survey/{order}', [SurveyController::class, 'adminUpdate'])->name('admin.survey.kirim');

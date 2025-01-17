@@ -18,13 +18,4 @@ class HistoryController extends Controller
     }
 
 
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
-    {
-        return view('admin.history.show', compact('order'));
-    }
-
 }

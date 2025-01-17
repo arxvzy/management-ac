@@ -20,6 +20,14 @@ class OrderController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(Order $order)
+    {
+        return view('admin.history.show', compact('order'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
