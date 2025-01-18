@@ -29,7 +29,7 @@ class AuthController extends Controller
         $credentials['is_active'] = true;
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->route('admin.home');
         }
 
         return back()->with('error', 'Username atau password salah.');
@@ -40,7 +40,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/login');
     }
 
     public function reset(Pengguna $pengguna)
