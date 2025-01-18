@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 @section('title', 'Manajemen Order')
 @section('content')
+    @php
+        $orderRow = ($orders->currentPage() - 1) * $orders->perPage() + 1;
+    @endphp
     <div>
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Manajemen Order
@@ -16,6 +19,7 @@
             <thead>
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    <th>No.</th>
                     <th>Jasa</th>
                     <th>Pelanggan</th>
                     <th>Harga Awal</th>
@@ -27,6 +31,7 @@
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                 @foreach ($orders as $order)
                     <tr class="text-gray-700 dark:text-gray-400">
+                        <td>{{ $orderRow++ }}</td>
                         <td>{{ $order->jasa->jasa }}</td>
                         <td>{{ $order->pelanggan->nama }}</td>
                         <td>Rp {{ number_format($order->harga_awal) }}</td>
@@ -62,6 +67,9 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $orders->links() }}
+        <div class="mt-10"></div>
+
     </div>
     <script>
         $(document).ready(function() {
@@ -69,9 +77,10 @@
                 info: false,
                 responsive: true,
                 paging: false,
+                searching: false,
                 order: [],
                 columnDefs: [{
-                    targets: [5],
+                    targets: [6],
                     orderable: false,
                 }, ],
             });

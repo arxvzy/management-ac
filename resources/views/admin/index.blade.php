@@ -2,11 +2,14 @@
 @section('title', 'Dashboard')
 
 @section('content')
+    @php
+        $orderRow = ($orders->currentPage() - 1) * $orders->perPage() + 1;
+        $pengeluaranRow = ($pengeluarans->currentPage() - 1) * $pengeluarans->perPage() + 1;
+    @endphp
     <div class="container px-6 mx-auto grid">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Dashboard
         </h2>
-
         <!-- Cards -->
         <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
             <!-- Card -->
@@ -46,7 +49,7 @@
                 </div>
             </div>
             <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                <div class="p-3 mr-4 text-red-500 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-500">
+                <div class="p-3 mr-4 rounded-full text-red-500 bg-red-100 dark:text-red-100 dark:bg-red-500">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
                             d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
@@ -58,7 +61,7 @@
                         Total Pengeluaran
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        Rp {{ number_format(collect($pengeluarans)->sum('nominal')) }}
+                        Rp {{ number_format($totalPengeluaran) }}
                     </p>
                 </div>
             </div>
@@ -76,7 +79,7 @@
                         Total Order
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {{ count($orders) }}
+                        {{ count($statusOrder) }}
                     </p>
                 </div>
             </div>
@@ -93,7 +96,7 @@
                         Order Selesai
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {{ count($orders->where('status', 'Selesai')) }}
+                        {{ $statusOrder->filter(fn($status) => $status === 'Selesai')->count() }}
                     </p>
                 </div>
             </div>
@@ -110,7 +113,7 @@
                         Order Batal
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {{ count($orders->where('status', 'Batal')) }}
+                        {{ $statusOrder->filter(fn($status) => $status === 'Batal')->count() }}
                     </p>
                 </div>
             </div>
@@ -124,6 +127,7 @@
             <thead>
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    <th>No.</th>
                     <th>Nama Pelanggan</th>
                     <th>Jasa</th>
                     <th>Teknisi</th>
@@ -137,6 +141,7 @@
                 @foreach ($orders as $order)
                     @if ($order->status == 'Selesai')
                         <tr class="text-gray-700 dark:text-gray-400">
+                            <td>{{ $orderRow++ }}</td>
                             <td>{{ $order->pelanggan->nama }}</td>
                             <td>{{ $order->jasa->jasa }}</td>
                             <td>{{ $order->pengguna->nama }}</td>
@@ -162,6 +167,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $orders->links() }}
 
         <h3 class="mt-6 text-xl font-semibold text-gray-700 dark:text-gray-200">
             Pengeluaran
@@ -170,6 +176,7 @@
             <thead>
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    <th>No.</th>
                     <th>Pengguna</th>
                     <th>Keterangan</th>
                     <th>Nominal</th>
@@ -179,6 +186,7 @@
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                 @foreach ($pengeluarans as $pengeluaran)
                     <tr class="text-gray-700 dark:text-gray-400">
+                        <td>{{ $pengeluaranRow++ }}</td>
                         <td>{{ $pengeluaran->pengguna->nama }}</td>
                         <td>{{ $pengeluaran->keterangan }}</td>
                         <td>Rp {{ number_format($pengeluaran->nominal) }}</td>
@@ -189,14 +197,17 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $pengeluarans->links() }}
+        <div class="mt-10"></div>
     </div>
     <script>
         $(document).ready(function() {
             $('#historyTable').DataTable({
                 info: false,
-                paging: false,
                 responsive: true,
-                order: [5, 'desc'],
+                order: [],
+                searching: false,
+                paging: false,
                 columnDefs: [{
                     targets: [6],
                     orderable: false,
@@ -207,8 +218,9 @@
             $('#pengeluaranTable').DataTable({
                 info: false,
                 responsive: true,
+                searching: false,
                 paging: false,
-                order: [3, 'desc'],
+                order: [],
             });
         });
     </script>

@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->orderBy('created_at', 'desc')->get();
+        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.order.index', compact('orders'));
     }
 
@@ -24,7 +24,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('admin.history.show', compact('order'));
+        return view('admin.order.show', compact('order'));
     }
 
     /**

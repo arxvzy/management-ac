@@ -14,7 +14,7 @@ class SurveyController extends Controller
      */
     public function adminIndex()
     {
-        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->where('is_survey_sent', false)->where('status', 'selesai')->get();
+        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->where('is_survey_sent', false)->where('status', 'selesai')->paginate(10);
         return view('admin.survey.index', compact('orders'));
     }
 

@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 @section('title', 'Kelola Jasa')
 @section('content')
+    @php
+        $jasaRow = ($jasas->currentPage() - 1) * $jasas->perPage() + 1;
+    @endphp
     <div>
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Kelola Jasa
@@ -16,6 +19,7 @@
             <thead>
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    <th>No.</th>
                     <th>Jasa</th>
                     <th>Keterangan</th>
                     <th></th>
@@ -24,6 +28,7 @@
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                 @foreach ($jasas as $jasa)
                     <tr class="text-gray-700 dark:text-gray-400">
+                        <td>{{ $jasaRow++ }}</td>
                         <td>{{ $jasa->jasa }}</td>
                         <td>{{ $jasa->keterangan }}</td>
                         <td>
@@ -49,6 +54,9 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $jasas->links() }}
+        <div class="mt-10"></div>
+
     </div>
     <script>
         $(document).ready(function() {
@@ -57,8 +65,9 @@
                 paging: false,
                 order: [],
                 responsive: true,
+                searching: false,
                 columnDefs: [{
-                    targets: [1, 2],
+                    targets: [2, 3],
                     orderable: false,
                 }, ],
             });

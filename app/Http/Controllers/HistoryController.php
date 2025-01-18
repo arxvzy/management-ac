@@ -13,7 +13,7 @@ class HistoryController extends Controller
     public function index()
     {
         // where status=selesai or status=batal
-        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->where('status', 'selesai')->orWhere('status', 'batal')->orderBy('tgl_pengerjaan', 'desc')->get();
+        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->where('status', 'selesai')->orWhere('status', 'batal')->orderBy('tgl_pengerjaan', 'desc')->paginate(10);
         return view('admin.history.index', compact('orders'));
     }
 

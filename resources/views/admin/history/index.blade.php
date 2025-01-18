@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 @section('title', 'History Order')
 @section('content')
+    @php
+        $orderRow = ($orders->currentPage() - 1) * $orders->perPage() + 1;
+    @endphp
     <div>
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             History Order
@@ -9,6 +12,7 @@
             <thead>
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    <th>No.</th>
                     <th>Nama Pelanggan</th>
                     <th>Jasa</th>
                     <th>Teknisi</th>
@@ -21,6 +25,7 @@
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                 @foreach ($orders as $order)
                     <tr class="text-gray-700 dark:text-gray-400">
+                        <td>{{ $orderRow++ }}</td>
                         <td>{{ $order->pelanggan->nama }}</td>
                         <td>{{ $order->jasa->jasa }}</td>
                         <td>{{ $order->pengguna->nama }}</td>
@@ -45,6 +50,8 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $orders->links() }}
+        <div class="mt-10"></div>
     </div>
     <script>
         $(document).ready(function() {
@@ -52,9 +59,10 @@
                 info: false,
                 paging: false,
                 responsive: true,
-                order: [5, 'desc'],
+                searching: false,
+                order: [],
                 columnDefs: [{
-                    targets: [6],
+                    targets: [7],
                     orderable: false,
                 }],
             });

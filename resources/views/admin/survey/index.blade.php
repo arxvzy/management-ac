@@ -1,15 +1,19 @@
 @extends('layouts.admin')
-@section('title', 'Kirim Survey Pelanggan')
+@section('title', 'Kirim Pesan Survey')
 @section('content')
+    @php
+        $orderRow = ($orders->currentPage() - 1) * $orders->perPage() + 1;
+    @endphp
     <div>
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            Kirim Survey Pelanggan
+            Kirim Pesan Survey
         </h2>
 
         <table id="surveyTable" class="display dark:text-gray-400">
             <thead>
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    <th>No.</th>
                     <th>Nama Pelanggan</th>
                     <th>No. HP</th>
                     <th>Tanggal Pengerjaan</th>
@@ -21,6 +25,7 @@
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                 @foreach ($orders as $order)
                     <tr class="text-gray-700 dark:text-gray-400">
+                        <td>{{ $orderRow++ }}</td>
                         <td>{{ $order->pelanggan->nama }}</td>
                         <td>{{ $order->pelanggan->no_hp }}</td>
                         <td>
@@ -48,6 +53,9 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $orders->links() }}
+        <div class="mt-10"></div>
+
     </div>
     <script>
         $(document).ready(function() {
@@ -55,6 +63,7 @@
                 info: false,
                 paging: false,
                 responsive: true,
+                searching: false,
                 ordering: false
             });
         });

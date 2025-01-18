@@ -32,7 +32,7 @@ class PengingatController extends Controller
                 'pelanggan.updated_at'
             )
             ->havingRaw('latest_order_date <= ?', [Carbon::now()->subMonths(3)])
-            ->get();
+            ->paginate(10);
 
 
         return view('admin.pengingat.index', compact('pelanggans'));

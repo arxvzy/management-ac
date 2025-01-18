@@ -15,9 +15,13 @@ class HomeController extends Controller
     public function index()
     {
         $pelanggan = Pelanggan::count();
-        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->get();
-        $pengeluarans = Pengeluaran::with('pengguna')->get();
         $pemasukan = Order::where('status', 'Selesai')->sum('harga_akhir'); 
-        return view('admin.index', compact('pelanggan', 'orders', 'pengeluarans', 'pemasukan'));
+        $totalPengeluaran = Pengeluaran::sum('nominal');
+        $statusOrder = Order::pluck('status');
+
+
+        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->where('status', 'Selesai')->orderBy('tgl_pengerjaan', 'asc')->paginate(10, ['*'], 'pemasukan_page')->withQueryString();
+        $pengeluarans = Pengeluaran::with('pengguna')->orderBy('tgl_pembelian', 'desc')->paginate(10, ['*'], 'pengeluaran_page')->withQueryString();
+        return view('admin.index', compact('pelanggan', 'orders', 'pengeluarans', 'pemasukan', 'totalPengeluaran', 'statusOrder'));
     }
 }
