@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/penugasan', [PenugasanController::class, 'index'])->name('admin.penugasan.index');
     Route::put('/penugasan/{order}', [PenugasanController::class, 'update'])->name('admin.penugasan.update');
     Route::get('/penugasan/{order}/edit', [PenugasanController::class, 'edit'])->name('admin.penugasan.edit');
+    Route::get('/penugasan/{order}', [OrderController::class, 'show'])->name('admin.penugasan.show');
 
     Route::get('/pengingat', [PengingatController::class, 'index'])->name('admin.pengingat.index');
     Route::put('/pengingat/{pelanggan}', [PengingatController::class, 'update'])->name('admin.pengingat.kirim');
