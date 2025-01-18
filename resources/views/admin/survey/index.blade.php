@@ -26,12 +26,12 @@
                 @foreach ($orders as $order)
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $orderRow++ }}</td>
-                        <td>{{ $order->pelanggan->nama }}</td>
-                        <td>{{ $order->pelanggan->no_hp }}</td>
+                        <td>{{ $order->pelanggan->nama ?? '-' }}</td>
+                        <td>{{ $order->pelanggan->no_hp ?? '-' }}</td>
                         <td>
                             {{ \Carbon\Carbon::parse($order->tgl_pengerjaan)->translatedFormat('l, j F Y H:i') }}
                         </td>
-                        <td>{{ $order->jasa->jasa }}</td>
+                        <td>{{ $order->jasa->jasa ?? '-' }}</td>
                         <td class="text-xs">
                             <span
                                 class="px-2 py-1 font-semibold leading-tight  rounded-full text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100">

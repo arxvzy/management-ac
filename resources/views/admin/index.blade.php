@@ -183,9 +183,9 @@
                     @if ($order->status == 'Selesai')
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td>{{ $orderRow++ }}</td>
-                            <td>{{ $order->pelanggan->nama }}</td>
-                            <td>{{ $order->jasa->jasa }}</td>
-                            <td>{{ $order->pengguna->nama }}</td>
+                            <td>{{ $order->pelanggan->nama ?? '-' }}</td>
+                            <td>{{ $order->jasa->jasa ?? '-' }}</td>
+                            <td>{{ $order->pengguna->nama ?? '-' }}</td>
                             <td class="text-xs">
                                 <span
                                     class="px-2 py-1 font-semibold leading-tight  rounded-full  {{ $order->status == 'Selesai' ? 'text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100' : 'text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100' }}">
@@ -230,7 +230,7 @@
                 @foreach ($pengeluarans as $pengeluaran)
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $pengeluaranRow++ }}</td>
-                        <td>{{ $pengeluaran->pengguna->nama }}</td>
+                        <td>{{ $pengeluaran->pengguna->nama ?? '-' }}</td>
                         <td>{{ $pengeluaran->keterangan }}</td>
                         <td>Rp {{ number_format($pengeluaran->nominal) }}</td>
                         <td data-order="{{ \Carbon\Carbon::parse($pengeluaran->tgl_pembelian)->format('Y-m-d H:i:s') }}">

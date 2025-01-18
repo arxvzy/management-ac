@@ -32,10 +32,10 @@
                 @foreach ($orders as $order)
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $orderRow++ }}</td>
-                        <td>{{ $order->jasa->jasa }}</td>
-                        <td>{{ $order->pelanggan->nama }}</td>
+                        <td>{{ $order->jasa->jasa ?? '-' }}</td>
+                        <td>{{ $order->pelanggan->nama ?? '-' }}</td>
                         <td>Rp {{ number_format($order->harga_awal) }}</td>
-                        <td>{{ $order->pengguna->nama }}</td>
+                        <td>{{ $order->pengguna->nama ?? '-' }}</td>
                         <td data-order="{{ \Carbon\Carbon::parse($order->jadwal)->format('Y-m-d') }}">
                             {{ \Carbon\Carbon::parse($order->jadwal)->translatedFormat('l, F j, Y') }}
                         </td>
@@ -52,7 +52,7 @@
                                     @method('DELETE')
                                 </form>
                                 <button
-                                    onclick="event.preventDefault(); confirmDelete({{ $order->id }}, '{{ $order->pelanggan->nama }}', 'order');"
+                                    onclick="event.preventDefault(); confirmDelete({{ $order->id }}, '{{ $order->pelanggan->nama ?? '-' }}', 'order');"
                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-red-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                                     <x-heroicon-s-trash class="w-5 h-5" />
                                 </button>

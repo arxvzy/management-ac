@@ -26,11 +26,11 @@
                 @foreach ($orders as $order)
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $orderRow++ }}</td>
-                        <td>{{ $order->pelanggan->nama }}</td>
-                        <td>{{ $order->pelanggan->koordinat }}</td>
-                        <td>{{ $order->pelanggan->no_hp }}</td>
-                        <td>{{ $order->jasa->jasa }}</td>
-                        <td>{{ $order->pengguna->nama }}</td>
+                        <td>{{ $order->pelanggan->nama ?? '-' }}</td>
+                        <td>{{ $order->pelanggan->koordinat ?? '-' }}</td>
+                        <td>{{ $order->pelanggan->no_hp ?? '-' }}</td>
+                        <td>{{ $order->jasa->jasa ?? '-' }}</td>
+                        <td>{{ $order->pengguna->nama ?? '-' }}</td>
                         <td data-order="{{ \Carbon\Carbon::parse($order->jadwal)->format('Y-m-d') }}">
                             {{ \Carbon\Carbon::parse($order->jadwal)->translatedFormat('l, F j, Y') }}
                         </td>

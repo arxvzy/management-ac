@@ -31,7 +31,7 @@
                 @foreach ($pengeluarans as $pengeluaran)
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $pengeluaranRow++ }}</td>
-                        <td>{{ $pengeluaran->pengguna->nama }}</td>
+                        <td>{{ $pengeluaran->pengguna->nama ?? '-' }}</td>
                         <td>{{ $pengeluaran->keterangan }}</td>
                         <td>Rp {{ number_format($pengeluaran->nominal) }}</td>
                         <td data-order="{{ \Carbon\Carbon::parse($pengeluaran->tgl_pembelian)->format('Y-m-d H:i:s') }}">

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_jasa');
+            $table->unsignedBigInteger('id_jasa')->nullable();
             $table->unsignedBigInteger('id_pengguna')->nullable();
-            $table->unsignedBigInteger('id_pelanggan');
+            $table->unsignedBigInteger('id_pelanggan')->nullable();
             $table->date('jadwal');
             $table->float('harga_awal');
             $table->float('harga_akhir')->nullable();
@@ -27,9 +27,9 @@ return new class extends Migration
             $table->text('deskripsi')->nullable();  
             $table->timestamps();
 
-            $table->foreign('id_jasa')->references('id')->on('jasa');
-            $table->foreign('id_pengguna')->references('id')->on('pengguna');
-            $table->foreign('id_pelanggan')->references('id')->on('pelanggan');
+            $table->foreign('id_jasa')->references('id')->on('jasa')->onDelete('set null');
+            $table->foreign('id_pengguna')->references('id')->on('pengguna')->onDelete('set null');
+            $table->foreign('id_pelanggan')->references('id')->on('pelanggan')->onDelete('set null');
         });
     }
 
