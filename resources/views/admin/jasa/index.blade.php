@@ -60,7 +60,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#jasaTable').DataTable({
+            var jasa = $('#jasaTable').DataTable({
                 info: false,
                 paging: false,
                 order: [],
@@ -71,6 +71,7 @@
                     orderable: false,
                 }, ],
             });
+            jasa.columns.adjust().responsive.recalc();
         });
     </script>
 @endsection

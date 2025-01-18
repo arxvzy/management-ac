@@ -247,7 +247,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#historyTable').DataTable({
+            var history = $('#historyTable').DataTable({
                 info: false,
                 responsive: true,
                 order: [],
@@ -258,15 +258,17 @@
                     orderable: false,
                 }],
             });
+            history.columns.adjust().responsive.recalc();
         });
         $(document).ready(function() {
-            $('#pengeluaranTable').DataTable({
+            var pengeluaran = $('#pengeluaranTable').DataTable({
                 info: false,
                 responsive: true,
                 searching: false,
                 paging: false,
                 order: [],
             });
+            pengeluaran.columns.adjust().responsive.recalc();
         });
         // format datepicker to yyyy-mm-dd
         $(function() {

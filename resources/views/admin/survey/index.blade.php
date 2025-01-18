@@ -59,13 +59,15 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#surveyTable').DataTable({
+            var survey = $('#surveyTable').DataTable({
                 info: false,
                 paging: false,
                 responsive: true,
                 searching: false,
                 ordering: false
             });
+
+            survey.columns.adjust().responsive.recalc();
         });
     </script>
 @endsection

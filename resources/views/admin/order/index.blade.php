@@ -73,7 +73,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#orderTable').DataTable({
+            var order = $('#orderTable').DataTable({
                 info: false,
                 responsive: true,
                 paging: false,
@@ -84,6 +84,7 @@
                     orderable: false,
                 }, ],
             });
+            order.columns.adjust().responsive.recalc();
         });
     </script>
 @endsection

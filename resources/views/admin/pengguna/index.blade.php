@@ -85,13 +85,14 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#penggunaTable').DataTable({
+            var pengguna = $('#penggunaTable').DataTable({
                 info: false,
                 paging: false,
                 responsive: true,
                 searching: false,
                 ordering: false
             });
+            pengguna.columns.adjust().responsive.recalc();
         });
     </script>
 @endsection

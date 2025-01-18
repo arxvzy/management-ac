@@ -51,13 +51,14 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#pengingatTable').DataTable({
+            var pengingat = $('#pengingatTable').DataTable({
                 info: false,
                 paging: false,
                 responsive: true,
                 searching: false,
                 ordering: false
             });
+            pengingat.columns.adjust().responsive.recalc();
         });
     </script>
 @endsection

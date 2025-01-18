@@ -58,7 +58,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#penugasanTable').DataTable({
+            var penugasan = $('#penugasanTable').DataTable({
                 info: false,
                 paging: false,
                 responsive: true,
@@ -69,6 +69,7 @@
                     orderable: false,
                 }],
             });
+            penugasan.columns.adjust().responsive.recalc();
         });
     </script>
 @endsection

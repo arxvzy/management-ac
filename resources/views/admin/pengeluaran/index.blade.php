@@ -66,7 +66,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#pengeluaranTable').DataTable({
+            var pengeluaran = $('#pengeluaranTable').DataTable({
                 info: false,
                 responsive: true,
                 paging: false,
@@ -77,6 +77,7 @@
                     orderable: false,
                 }, ],
             });
+            pengeluaran.columns.adjust().responsive.recalc();
         });
     </script>
 @endsection

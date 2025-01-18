@@ -64,7 +64,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#pelangganTable').DataTable({
+            var pelanggan = $('#pelangganTable').DataTable({
                 info: false,
                 paging: false,
                 responsive: true,
@@ -75,6 +75,7 @@
                     orderable: false,
                 }, ],
             });
+            pelanggan.columns.adjust().responsive.recalc();
         });
     </script>
 @endsection

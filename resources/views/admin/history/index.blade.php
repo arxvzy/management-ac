@@ -55,17 +55,21 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#historyTable').DataTable({
+            var history = $('#historyTable').DataTable({
                 info: false,
                 paging: false,
                 responsive: true,
                 searching: false,
                 order: [],
                 columnDefs: [{
-                    targets: [7],
+                    targets: [
+                        7
+                    ],
                     orderable: false,
                 }],
             });
+
+            history.columns.adjust().responsive.recalc();
         });
     </script>
 @endsection
