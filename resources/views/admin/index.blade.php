@@ -11,7 +11,7 @@
             $pengeluaranRow = ($pengeluarans->currentPage() - 1) * $pengeluarans->perPage() + 1;
         }
     @endphp
-    <div class="container px-6 mx-auto grid">
+    <div>
         <div class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200 md:flex md:justify-between">
             <h2>Dashboard</h2>
             <form action="{{ route('admin.home') }}" method="GET"
