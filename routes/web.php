@@ -15,12 +15,12 @@ use App\Http\Controllers\PengeluaranController;
 
     Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('auth.authenticate');
-
-
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/',[HomeController::class, 'index'])->name('admin.home');
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+
+
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/',[HomeController::class, 'index'])->name('admin.home');
     Route::get('/pengguna/{pengguna}/reset', [AuthController::class, 'reset'])->name('auth.reset');
     Route::put('/pengguna/{pengguna}/reset', [AuthController::class, 'update'])->name('auth.update');
 
@@ -38,13 +38,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/pelanggan/{pelanggan}', [PelangganController::class, 'destroy'])->name('admin.pelanggan.hapus');
     Route::put('/pelanggan/{pelanggan}', [PelangganController::class, 'update'])->name('admin.pelanggan.update');
 
-    Route::get('/pengeluaran', [PengeluaranController::class, 'index'])->name('admin.pengeluaran.index');
-    Route::get('/pengeluaran/tambah', [PengeluaranController::class, 'create'])->name('admin.pengeluaran.tambah');
-    Route::post('/pengeluaran', [PengeluaranController::class, 'store'])->name('admin.pengeluaran.simpan');
-    Route::get('/pengeluaran/{pengeluaran}/edit', [PengeluaranController::class, 'edit'])->name('admin.pengeluaran.edit');
-    Route::delete('/pengeluaran/{pengeluaran}', [PengeluaranController::class, 'destroy'])->name('admin.pengeluaran.hapus');
-    Route::put('/pengeluaran/{pengeluaran}', [PengeluaranController::class, 'update'])->name('admin.pengeluaran.update');
-
     Route::get('/jasa', [JasaController::class, 'index'])->name('admin.jasa.index');
     Route::get('/jasa/tambah', [JasaController::class, 'create'])->name('admin.jasa.tambah');
     Route::post('/jasa', [JasaController::class, 'store'])->name('admin.jasa.simpan');
@@ -60,11 +53,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/order/{order}', [OrderController::class, 'update'])->name('admin.order.update');
     Route::get('/order/{order}', [OrderController::class, 'show'])->name('admin.order.show');
 
-    Route::get('/penugasan', [PenugasanController::class, 'index'])->name('admin.penugasan.index');
-    Route::put('/penugasan/{order}', [PenugasanController::class, 'update'])->name('admin.penugasan.update');
-    Route::get('/penugasan/{order}/edit', [PenugasanController::class, 'edit'])->name('admin.penugasan.edit');
-    Route::get('/penugasan/{order}', [OrderController::class, 'show'])->name('admin.penugasan.show');
-
     Route::get('/pengingat', [PengingatController::class, 'index'])->name('admin.pengingat.index');
     Route::put('/pengingat/{pelanggan}', [PengingatController::class, 'update'])->name('admin.pengingat.kirim');
 
@@ -72,6 +60,21 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/survey', [SurveyController::class, 'adminIndex'])->name('admin.survey.index');
     Route::put('/survey/{order}', [SurveyController::class, 'adminUpdate'])->name('admin.survey.kirim');
-    });
+});
+
+Route::middleware(['role:admin,teknisi'])->group(function () {
+    Route::get('/penugasan', [PenugasanController::class, 'index'])->name('admin.penugasan.index');
+    Route::put('/penugasan/{order}', [PenugasanController::class, 'update'])->name('admin.penugasan.update');
+    Route::get('/penugasan/{order}/edit', [PenugasanController::class, 'edit'])->name('admin.penugasan.edit');
+    Route::get('/penugasan/{order}', [OrderController::class, 'show'])->name('admin.penugasan.show');
+
+    Route::get('/pengeluaran', [PengeluaranController::class, 'index'])->name('admin.pengeluaran.index');
+    Route::get('/pengeluaran/tambah', [PengeluaranController::class, 'create'])->name('admin.pengeluaran.tambah');
+    Route::post('/pengeluaran', [PengeluaranController::class, 'store'])->name('admin.pengeluaran.simpan');
+    Route::get('/pengeluaran/{pengeluaran}/edit', [PengeluaranController::class, 'edit'])->name('admin.pengeluaran.edit');
+    Route::delete('/pengeluaran/{pengeluaran}', [PengeluaranController::class, 'destroy'])->name('admin.pengeluaran.hapus');
+    Route::put('/pengeluaran/{pengeluaran}', [PengeluaranController::class, 'update'])->name('admin.pengeluaran.update');
+});
+
 Route::get('/survey/{order}', [SurveyController::class, 'clientIndex'])->name('survey.show');
 Route::put('/survey/{order}/review', [SurveyController::class, 'clientUpdate'])->name('survey.simpan');
