@@ -32,7 +32,7 @@
                 <span class="text-gray-700 dark:text-gray-400">Tanggal Pembelian</span>
                 <input
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                    placeholder="Tanggal Pembelian" name="tgl_pembelian" type="datetime-local"
+                    placeholder="Tanggal Pembelian" name="tgl_pembelian" id="tgl_pembelian" type="datetime-local"
                     value="{{ old('tgl_pembelian') }}" />
                 @error('tgl_pembelian')
                     <span class="text-red-400">{{ $message }}</span>
@@ -41,4 +41,14 @@
             <x-button class="mt-6 py-3" type="submit">Simpan</x-button>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const datetimeInput = document.getElementById('tgl_pembelian');
+            datetimeInput.addEventListener('click', () => {
+                if (datetimeInput.showPicker) {
+                    datetimeInput.showPicker();
+                }
+            });
+        });
+    </script>
 @endsection

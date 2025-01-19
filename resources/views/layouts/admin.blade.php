@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="/assets/css/datatables.min.css" />
     <script src="/assets/js/datatables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css" />
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 </head>
 
 <body>
