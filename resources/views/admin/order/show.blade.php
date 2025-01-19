@@ -3,7 +3,8 @@
 
 @section('content')
     <div>
-        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+        <x-button class="py-2 mt-6" href="{{ url()->previous() }}">Kembali</x-button>
+        <h2 class="mb-6 mt-2 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Detail Order
         </h2>
 
@@ -18,6 +19,19 @@
                     <dd class=" sm:col-span-2">{{ $order->jasa->jasa ?? '-' }}</dd>
                 </div>
                 <div class="grid grid-cols-1 gap-1 py-2 even:bg-gray-50 dark:even:bg-gray-800 sm:grid-cols-3 sm:gap-4">
+                    <dt class="font-medium ">No. Telp Pelanggan</dt>
+                    <dd class=" sm:col-span-2">{{ $order->pelanggan->no_hp ?? '-' }}</dd>
+                </div>
+                <div class="grid grid-cols-1 gap-1 py-2 even:bg-gray-50 dark:even:bg-gray-800 sm:grid-cols-3 sm:gap-4">
+                    <dt class="font-medium ">Alamat Pelanggan</dt>
+                    <dd class=" sm:col-span-2">{{ $order->pelanggan->alamat ?? '-' }}</dd>
+                </div>
+                <div class="grid grid-cols-1 gap-1 py-2 even:bg-gray-50 dark:even:bg-gray-800 sm:grid-cols-3 sm:gap-4">
+                    <dt class="font-medium ">Koordinat Pelanggan</dt>
+                    <dd class=" sm:col-span-2"><a href="{{ $order->pelanggan->koordinat }}" class="underline"
+                            target="_blank">{{ $order->pelanggan->koordinat ?? '-' }}</a></dd>
+                </div>
+                <div class="grid grid-cols-1 gap-1 py-2 even:bg-gray-50 dark:even:bg-gray-800 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium ">Teknisi</dt>
                     <dd class=" sm:col-span-2">{{ $order->pengguna->nama ?? '-' }}</dd>
                 </div>
@@ -25,6 +39,10 @@
                     <dt class="font-medium ">Jadwal</dt>
                     <dd class=" sm:col-span-2">
                         {{ \Carbon\Carbon::parse($order->jadwal)->translatedFormat('l, F j, Y') }}</dd>
+                </div>
+                <div class="grid grid-cols-1 gap-1 py-2 even:bg-gray-50 dark:even:bg-gray-800 sm:grid-cols-3 sm:gap-4">
+                    <dt class="font-medium ">Keterangan</dt>
+                    <dd class=" sm:col-span-2">{{ $order->deskripsi ?? '-' }}</dd>
                 </div>
                 <div class="grid grid-cols-1 gap-1 py-2 even:bg-gray-50 dark:even:bg-gray-800 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium ">Metode Pembayaran</dt>
@@ -61,5 +79,6 @@
                 </div>
             </dl>
         </div>
+        <div class="mt-10"></div>
     </div>
 @endsection
