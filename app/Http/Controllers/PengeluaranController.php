@@ -13,7 +13,12 @@ class PengeluaranController extends Controller
      */
     public function index()
     {
-        $pengeluarans = Pengeluaran::with('pengguna')->orderBy('created_at', 'desc')->paginate(10);
+        $user = Auth::user();
+        if ($user->role == 'teknisi') {
+            $pengeluarans = Pengeluaran::with('pengguna')->where('id_pengguna', $user->id)->orderBy('created_at', 'desc')->paginate(10);
+        } else {
+            $pengeluarans = Pengeluaran::with('pengguna')->orderBy('created_at', 'desc')->paginate(10);
+        }
         return view('admin.pengeluaran.index', compact('pengeluarans'));
     }
 
