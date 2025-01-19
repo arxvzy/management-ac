@@ -34,7 +34,8 @@
                         <td>{{ $pelanggan->nama }}</td>
                         <td>{{ $pelanggan->no_hp }}</td>
                         <td>{{ $pelanggan->alamat }}</td>
-                        <td>{{ $pelanggan->koordinat }}</td>
+                        <td><a href="{{ $pelanggan->koordinat }}" class="underline"
+                                target="_blank">{{ $pelanggan->koordinat }}</a></td>
                         <td>
                             <div class="flex items-center space-x-4 text-sm">
                                 <a href="{{ route('admin.pelanggan.edit', $pelanggan->id) }}"

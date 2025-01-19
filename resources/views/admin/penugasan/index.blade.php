@@ -16,9 +16,11 @@
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
                     <th>No. HP</th>
+                    <th>Koordinat</th>
                     <th>Jasa</th>
                     <th>Teknisi</th>
                     <th>Jadwal</th>
+                    <th>Keterangan</th>
                     <th></th>
                 </tr>
             </thead>
@@ -27,13 +29,16 @@
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $orderRow++ }}</td>
                         <td>{{ $order->pelanggan->nama ?? '-' }}</td>
-                        <td>{{ $order->pelanggan->koordinat ?? '-' }}</td>
+                        <td>{{ $order->pelanggan->alamat ?? '-' }}</td>
                         <td>{{ $order->pelanggan->no_hp ?? '-' }}</td>
+                        <td><a href="{{ $pelanggan->koordinat ?? '#' }}" class="underline"
+                                target="_blank">{{ $order->pelanggan->koordinat ?? '-' }}</a></td>
                         <td>{{ $order->jasa->jasa ?? '-' }}</td>
                         <td>{{ $order->pengguna->nama ?? '-' }}</td>
                         <td data-order="{{ \Carbon\Carbon::parse($order->jadwal)->format('Y-m-d') }}">
                             {{ \Carbon\Carbon::parse($order->jadwal)->translatedFormat('l, F j, Y') }}
                         </td>
+                        <td>{{ $order->deskripsi ?? '-' }}</td>
                         <td>
                             <div class="flex items-center space-x-4 text-sm">
                                 <a href="{{ route('admin.penugasan.edit', $order->id) }}"

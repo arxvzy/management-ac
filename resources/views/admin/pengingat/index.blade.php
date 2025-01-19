@@ -26,7 +26,7 @@
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $pelangganRow++ }}</td>
                         <td>{{ $pelanggan->nama }}</td>
-                        <td>{{ $pelanggan->koordinat }}</td>
+                        <td>{{ $pelanggan->alamat }}</td>
                         <td>{{ $pelanggan->no_hp }}</td>
                         <td>{{ \Carbon\Carbon::parse($pelanggan->latest_order_date)->translatedFormat('l, j F Y H:i') }}
                         </td>
