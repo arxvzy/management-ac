@@ -20,7 +20,7 @@ class PelangganFactory extends Factory
     {
         return [
             'nama' => $this->faker->name,
-            'no_hp' => $this->faker->phoneNumber,
+            'no_hp' => '62' . ltrim($this->faker->numerify('8##########'), '0'),
             'alamat' => $this->faker->address,
             'koordinat' => "https://maps.app.goo.gl/...",
         ];

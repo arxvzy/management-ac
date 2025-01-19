@@ -23,7 +23,7 @@ class PenggunaFactory extends Factory
             'username' => $this->faker->unique()->userName,
             'password' => bcrypt('123456'),
             'is_active' => $this->faker->boolean,
-            'role' => $this->faker->randomElement(['admin', 'teknisi']),
+            'role' => 'teknisi',
         ];
     }
 }

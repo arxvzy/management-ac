@@ -19,7 +19,7 @@ class JasaFactory extends Factory
     public function definition(): array
     {
         return [
-            'jasa' => $this->faker->randomElement(['Premium', 'Basic', 'Minimum']),
+            'jasa' => $this->faker->unique()->randomElement(['Premium', 'Basic', 'Minimum']),
             'keterangan' => $this->faker->sentence,
         ];
     }

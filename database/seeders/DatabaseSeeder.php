@@ -22,14 +22,15 @@ class DatabaseSeeder extends Seeder
         Pengguna::factory()->create([
             'nama' => 'Admin',
             'username' => 'admin',
-            'password' => bcrypt('admin'),
+            'password' => bcrypt('Admin423!'),
             'role' => 'admin',
             'is_active' => true
         ]);
 
-        Pelanggan::factory(20)->create();
+        Pengguna::factory(5)->create();
+        Pelanggan::factory(5)->create();
         Jasa::factory(3)->create();
-        Pengeluaran::factory(30)->create();
+        Pengeluaran::factory(5)->create();
         Order::factory(20)->create();
     }
 }
