@@ -41,7 +41,6 @@ class PenugasanController extends Controller
     public function update(Request $request, Order $order)
     {
         $validated = $request->validate([
-            'deskripsi' => 'required',
             'harga_akhir' => 'required|numeric',
             'metode_pembayaran' => 'required',
             'status' => 'required',

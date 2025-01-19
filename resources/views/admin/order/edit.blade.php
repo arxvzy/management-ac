@@ -52,7 +52,7 @@
                     class="px-2 py-2 bg-gray-100 border border-gray-300 rounded-l dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">Rp</span>
                 <input type="number" id="harga_awal" name="harga_awal" placeholder="Harga Awal"
                     value="{{ $order->harga_awal }}"
-                    class="w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-r">
+                    class="w-full py-2 px-2 border-2 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-r">
             </div>
             @error('harga_awal')
                 <span class="text-red-400">{{ $message }}</span>
@@ -61,7 +61,7 @@
                 <span class="text-gray-700 dark:text-gray-400">Jadwal</span>
                 <input
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                    placeholder="Jadwal" name="jadwal" type="date" value="{{ $order->jadwal }}" />
+                    placeholder="Jadwal" name="jadwal" id="jadwal" type="date" value="{{ $order->jadwal }}" />
                 @error('jadwal')
                     <span class="text-red-400">{{ $message }}</span>
                 @enderror
@@ -83,7 +83,24 @@
                     <span class="text-red-400">{{ $message }}</span>
                 @enderror
             </label>
+            <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Keterangan</span>
+                <textarea
+                    class="block border-2 w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                    rows="3" placeholder="Masukkan keterangan" name="deskripsi">{{ $order->deskripsi }}</textarea>
+                @error('deskripsi')
+                    <span class="text-red-400">{{ $message }}</span>
+                @enderror
+            </label>
             <x-button class="mt-6 py-3" type="submit">Simpan</x-button>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('jadwal');
+            dateInput.addEventListener('click', () => {
+                dateInput.showPicker();
+            });
+        });
+    </script>
 @endsection

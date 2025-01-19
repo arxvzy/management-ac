@@ -49,7 +49,9 @@ class OrderController extends Controller
             'jadwal' => 'required',
             'harga_awal' => "required|numeric",
         ]);
-        
+        if($request->has('deskripsi')) {
+            $validated['deskripsi'] = $request->deskripsi;
+        }
         if ($request->has('id_pengguna')) {
             $validated['id_pengguna'] = $request->id_pengguna;
         }
@@ -81,7 +83,9 @@ class OrderController extends Controller
             'jadwal' => 'required|date',
             'harga_awal' => "required|numeric",
         ]);
-
+        if($request->has('deskripsi')) {
+            $validated['deskripsi'] = $request->deskripsi;
+        }
         if ($request->has('id_pengguna')) {
             $validated['id_pengguna'] = $request->id_pengguna;
         }
