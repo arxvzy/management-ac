@@ -15,21 +15,25 @@
         <div class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200 md:flex md:justify-between">
             <h2>Dashboard</h2>
             <form action="{{ route('admin.home') }}" method="GET"
-                class="flex flex-row md:items-center gap-2 text-xs mt-4 md:mt-0 w-1/3 md:w-auto">
-                <input type="text" id="from" name="from" class="opacity-0 w-0" autocomplete="off" />
-                <label for="from" class="cursor-pointer flex justify-center gap-2">
-                    <p class="my-auto">Dari</p><x-heroicon-o-calendar-date-range class="w-5 h-5 my-auto" />
-                </label>
+                class="flex flex-col md:flex-row gap-4 text-xs mt-4 md:mt-0 w-1/3 md:w-auto">
+                <div class="flex flex-row md:items-center gap-2 ">
+                    <label for="from" class="cursor-pointer flex justify-center gap-2">
+                        <p class="my-auto">Dari</p>
+                        <input type="date" id="from" name="from"
+                            class=" bg-white text-black dark:bg-gray-800 dark:text-white border dark:border-gray-700 rounded"
+                            value="{{ old('from', request('from')) }}" />
+                    </label>
 
-                <span class="m-auto">-</span>
 
-                <!-- To Date -->
-                <label for="to" class="cursor-pointer flex justify-center gap-2">
-                    <x-heroicon-o-calendar-date-range class="w-5 h-5 my-auto" />
-                    <p class="my-auto">Sampai</p>
-                </label>
-                <input type="text" id="to" name="to" class="opacity-0 w-0" autocomplete="off" />
-                <x-button type="submit" class="max-w-24">Cari</x-button>
+                    <!-- To Date -->
+                    <label for="to" class="cursor-pointer flex justify-center gap-2">
+                        <p class="my-auto">Sampai</p>
+                        <input type="date" id="to" name="to"
+                            class=" bg-white text-black dark:bg-gray-800 dark:text-white border dark:border-gray-700 rounded"
+                            value="{{ old('to', request('to')) }}" />
+                    </label>
+                </div>
+                <x-button type="submit" class="max-w-20">Cari</x-button>
             </form>
         </div>
 
@@ -269,17 +273,30 @@
                 order: [],
             });
             pengeluaran.columns.adjust().responsive.recalc();
+
         });
-        // format datepicker to yyyy-mm-dd
-        $(function() {
-            $("#from").datepicker({
-                dateFormat: 'yy-mm-dd'
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const fromDate = document.getElementById('from');
+            fromDate.addEventListener('click', () => {
+                fromDate.showPicker();
+            });
+            const toDate = document.getElementById('to');
+            toDate.addEventListener('click', () => {
+                toDate.showPicker();
             });
         });
-        $(function() {
-            $("#to").datepicker({
-                dateFormat: 'yy-mm-dd'
-            });
+
+        document.querySelector('form').addEventListener('submit', function(event) {
+            let toDate = document.getElementById('to');
+            let fromDate = document.getElementById('from');
+
+            if (!toDate.value) {
+                toDate.disabled = true;
+            }
+            if (!fromDate.value) {
+                fromDate.disabled = true;
+            }
         });
     </script>
 @endsection
