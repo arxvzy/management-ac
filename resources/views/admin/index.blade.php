@@ -14,27 +14,36 @@
     <div>
         <div class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200 md:flex md:justify-between">
             <h2>Dashboard</h2>
+            @php
+                use Carbon\Carbon;
+
+                $defaultFrom = request('from') ? request('from') : Carbon::now()->startOfMonth()->toDateString();
+
+                $defaultTo = request('to') ? request('to') : Carbon::now()->toDateString();
+            @endphp
+
             <form action="{{ route('admin.home') }}" method="GET"
                 class="flex flex-col md:flex-row gap-4 text-xs mt-4 md:mt-0 w-1/3 md:w-auto">
-                <div class="flex flex-row md:items-center gap-2 ">
+
+                <div class="flex flex-row md:items-center gap-2">
                     <label for="from" class="cursor-pointer flex justify-center gap-2">
                         <p class="my-auto">Dari</p>
                         <input type="date" id="from" name="from"
-                            class=" bg-white text-black dark:bg-gray-800 dark:text-white border dark:border-gray-700 rounded"
-                            value="{{ old('from', request('from')) }}" />
+                            class="bg-white text-black dark:bg-gray-800 dark:text-white border dark:border-gray-700 rounded"
+                            value="{{ $defaultFrom }}" />
                     </label>
 
-
-                    <!-- To Date -->
                     <label for="to" class="cursor-pointer flex justify-center gap-2">
                         <p class="my-auto">Sampai</p>
                         <input type="date" id="to" name="to"
-                            class=" bg-white text-black dark:bg-gray-800 dark:text-white border dark:border-gray-700 rounded"
-                            value="{{ old('to', request('to')) }}" />
+                            class="bg-white text-black dark:bg-gray-800 dark:text-white border dark:border-gray-700 rounded"
+                            value="{{ $defaultTo }}" />
                     </label>
                 </div>
+
                 <x-button type="submit" class="max-w-20">Cari</x-button>
             </form>
+
         </div>
 
 
@@ -163,6 +172,25 @@
                 </div>
             </div>
         </div>
+        <!-- Lines chart -->
+        <h3 class="mt-6 text-xl font-semibold text-gray-700 dark:text-gray-200">
+            Grafik Pemasukan dan Pengeluaran Bulanan
+        </h3>
+        <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 h-80">
+
+            <canvas id="incomeOutcomeLine"></canvas>
+
+            <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+                <div class="flex items-center">
+                    <span class="inline-block w-3 h-3 mr-1 bg-teal-500 rounded-full"></span>
+                    <span>Pemasukan</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
+                    <span>Pengeluaran</span>
+                </div>
+            </div>
+        </div>
 
         <h3 class="mt-6 text-xl font-semibold text-gray-700 dark:text-gray-200">
             Pemasukan
@@ -174,10 +202,10 @@
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <th>No.</th>
                     <th>Nama Pelanggan</th>
+                    <th>Harga Akhir</th>
                     <th>Jasa</th>
                     <th>Teknisi</th>
                     <th>Status</th>
-                    <th>Harga Akhir</th>
                     <th>Tanggal Pengerjaan</th>
                     <th></th>
                 </tr>
@@ -299,4 +327,82 @@
             }
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script>
+        const lineConfig = {
+            type: 'line',
+            data: {
+                labels: @json($chartLabels),
+                datasets: [{
+                        label: 'Income',
+                        backgroundColor: '#14b8a6', // teal-500
+                        borderColor: '#14b8a6',
+                        data: @json($incomePerMonth),
+                        fill: false,
+                    },
+                    {
+                        label: 'Outcome',
+                        backgroundColor: '#7c3aed', // purple-600
+                        borderColor: '#7c3aed',
+                        data: @json($outcomePerMonth),
+                        fill: false,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                legend: {
+                    display: false,
+                },
+
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            const label = data.datasets[tooltipItem.datasetIndex].label || '';
+                            return label + ': Rp ' +
+                                new Intl.NumberFormat('id-ID').format(tooltipItem.yLabel);
+                        }
+                    }
+                },
+
+                hover: {
+                    mode: 'nearest',
+                    intersect: true,
+                },
+
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        ticks: {
+                            fontColor: '#9ca3af',
+                        },
+                        gridLines: {
+                            display: false,
+                        },
+                    }],
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            fontColor: '#9ca3af',
+                            beginAtZero: true,
+                            callback: function(value) {
+                                return 'Rp ' + new Intl.NumberFormat('id-ID').format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: 'rgba(156, 163, 175, 0.2)',
+                        },
+                    }],
+                },
+            },
+        }
+
+        const lineCtx = document.getElementById('incomeOutcomeLine')
+        new Chart(lineCtx, lineConfig)
+    </script>
+
 @endsection
