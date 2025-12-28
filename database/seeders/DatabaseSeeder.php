@@ -28,9 +28,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Pengguna::factory(5)->create();
-        Pelanggan::factory(5)->create();
+        Pelanggan::factory(50)->create();
         Jasa::factory(3)->create();
-        Pengeluaran::factory(5)->create();
-        Order::factory(20)->create();
+        Pengeluaran::factory(200)->create();
+        Order::factory(300)->create();
     }
 }

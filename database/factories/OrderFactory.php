@@ -29,10 +29,10 @@ class OrderFactory extends Factory
             'metode_pembayaran' => $this->faker->randomElement(['Tunai', 'Transfer']),
             'harga_awal' => $this->faker->numberBetween(100000, 1000000),
             'harga_akhir' => $this->faker->numberBetween(100000, 1000000),
-            'tgl_pengerjaan' => $this->faker->optional()->dateTimeBetween('-100 days', '-80 days'),
-            'status' => $this->faker->randomElement(['Selesai', 'Batal']),
+            'tgl_pengerjaan' => $this->faker->optional()->dateTimeBetween('-365 days', '-1 days'),
+            'status' => $this->faker->randomElement(['Selesai', 'Batal', null]),
             'is_survey_sent' => false,
-            'testimoni' => $this->faker->optional()->sentence,
+            'testimoni' => null,
             'deskripsi' => $this->faker->sentence()
         ];
     }

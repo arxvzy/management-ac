@@ -22,7 +22,7 @@ class PengeluaranFactory extends Factory
         return [
             'keterangan' => $this->faker->sentence,
             'nominal' => $this->faker->randomNumber(6),
-            'tgl_pembelian' => $this->faker->dateTimeBetween('-6 months', 'now'),
+            'tgl_pembelian' => $this->faker->dateTimeBetween('-12 months', 'now'),
             'id_pengguna' => $this->faker->randomElement(Pengguna::pluck('id')->toArray()),
         ];
     }
