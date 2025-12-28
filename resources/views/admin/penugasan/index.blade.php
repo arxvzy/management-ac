@@ -16,6 +16,7 @@
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
                     <th>No. HP</th>
+                    <th>Status</th>
                     <th>Koordinat</th>
                     <th>Jasa</th>
                     <th>Teknisi</th>
@@ -31,6 +32,12 @@
                         <td>{{ $order->pelanggan->nama ?? '-' }}</td>
                         <td>{{ $order->pelanggan->alamat ?? '-' }}</td>
                         <td>{{ $order->pelanggan->no_hp ?? '-' }}</td>
+                        <td class="text-xs">
+                            <div
+                                class="text-xs px-2 py-1 font-semibold leading-tight  rounded-full  text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100 text-center">
+                                Belum Dikerjakan
+                            </div>
+                        </td>
                         <td><a href="{{ $order->pelanggan->koordinat ?? '#' }}" class="underline"
                                 target="_blank">{{ $order->pelanggan->koordinat ?? '-' }}</a></td>
                         <td>{{ $order->jasa->jasa ?? '-' }}</td>
