@@ -116,7 +116,7 @@
                         Total Order
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {{ count($statusOrder) }}
+                        {{ count($totalOrders) }}
                     </p>
                 </div>
             </div>
@@ -133,7 +133,7 @@
                         Order Selesai
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {{ $statusOrder->filter(fn($status) => $status === 'Selesai')->count() }}
+                        {{ $totalOrders->filter(fn($status) => $status === 'Selesai')->count() }}
                     </p>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                         Order Batal
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {{ $statusOrder->filter(fn($status) => $status === 'Batal')->count() }}
+                        {{ $totalOrders->filter(fn($status) => $status === 'Batal')->count() }}
                     </p>
                 </div>
             </div>
@@ -167,7 +167,7 @@
                         Pending Order
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {{ $statusOrder->filter(fn($status) => is_null($status))->count() }}
+                        {{ $totalOrders->filter(fn($status) => is_null($status))->count() }}
                     </p>
                 </div>
             </div>
@@ -334,14 +334,14 @@
             data: {
                 labels: @json($chartLabels),
                 datasets: [{
-                        label: 'Income',
+                        label: 'Pemasukan',
                         backgroundColor: '#14b8a6', // teal-500
                         borderColor: '#14b8a6',
                         data: @json($incomePerMonth),
                         fill: false,
                     },
                     {
-                        label: 'Outcome',
+                        label: 'Pengeluaran',
                         backgroundColor: '#7c3aed', // purple-600
                         borderColor: '#7c3aed',
                         data: @json($outcomePerMonth),

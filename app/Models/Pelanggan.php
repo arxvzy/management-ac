@@ -21,4 +21,9 @@ class Pelanggan extends Model
     {
         return $this->hasMany(Order::class, 'id_pelanggan');
     }
+
+    public function kritikSaran()
+    {
+        return $this->hasMany(KritikSaran::class, 'id_pelanggan');
+    }
 }

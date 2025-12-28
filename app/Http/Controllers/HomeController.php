@@ -31,6 +31,8 @@ class HomeController extends Controller
 
         $pelanggan = Pelanggan::count();
 
+        $totalOrders = Order::pluck('status');
+
         // =========================
         // Financial cards
         // =========================
@@ -40,9 +42,6 @@ class HomeController extends Controller
 
         $totalPengeluaran = Pengeluaran::whereBetween('tgl_pembelian', [$financialFrom, $financialTo])
             ->sum('nominal');
-
-        $statusOrder = Order::whereBetween('tgl_pengerjaan', [$financialFrom, $financialTo])
-            ->pluck('status');
 
         // =========================
         // Financial tables
@@ -64,30 +63,40 @@ class HomeController extends Controller
         // Chart (GLOBAL yearly)
         // =========================
         $income = Order::select(
-                DB::raw('MONTH(tgl_pengerjaan) as month'),
-                DB::raw('SUM(harga_akhir) as total')
-            )
+            DB::raw('MONTH(tgl_pengerjaan) as month'),
+            DB::raw('SUM(harga_akhir) as total')
+        )
             ->whereYear('tgl_pengerjaan', $year)
             ->where('status', 'Selesai')
             ->groupBy(DB::raw('MONTH(tgl_pengerjaan)'))
             ->pluck('total', 'month');
 
         $outcome = Pengeluaran::select(
-                DB::raw('MONTH(tgl_pembelian) as month'),
-                DB::raw('SUM(nominal) as total')
-            )
+            DB::raw('MONTH(tgl_pembelian) as month'),
+            DB::raw('SUM(nominal) as total')
+        )
             ->whereYear('tgl_pembelian', $year)
             ->groupBy(DB::raw('MONTH(tgl_pembelian)'))
             ->pluck('total', 'month');
 
         // Normalize to 12 months
         $months = collect(range(1, 12));
-        $incomePerMonth = $months->map(fn ($m) => $income[$m] ?? 0);
-        $outcomePerMonth = $months->map(fn ($m) => $outcome[$m] ?? 0);
+        $incomePerMonth = $months->map(fn($m) => $income[$m] ?? 0);
+        $outcomePerMonth = $months->map(fn($m) => $outcome[$m] ?? 0);
 
         $chartLabels = [
-            'Jan','Feb','Mar','Apr','Mei','Jun',
-            'Jul','Agu','Sep','Okt','Nov','Des'
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'Mei',
+            'Jun',
+            'Jul',
+            'Agu',
+            'Sep',
+            'Okt',
+            'Nov',
+            'Des'
         ];
 
         return view('admin.index', compact(
@@ -96,7 +105,7 @@ class HomeController extends Controller
             'pengeluarans',
             'pemasukan',
             'totalPengeluaran',
-            'statusOrder',
+            'totalOrders',
             'chartLabels',
             'incomePerMonth',
             'outcomePerMonth'

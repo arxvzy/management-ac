@@ -28,8 +28,12 @@ class SurveyController extends Controller
         $order->save();
 
         $message = "Halo, {$order->pelanggan->nama}\n\n" .
-            "Jika berkenan, silahkan isi survey di link berikut " . env('APP_URL') . "/survey/{$order->id} untuk masukan dan evaluasi atas pekerjaan kami.
-";
+        "Terima kasih telah menggunakan layanan kami.\n\n" .
+        "Kami sangat menghargai apabila Anda bersedia mengisi survey pada link berikut:\n" .
+        env('APP_URL') . "/survey/{$order->id}\n\n" .
+        "Masukan berupa kritik dan saran dari Anda akan sangat membantu kami dalam meningkatkan kualitas pelayanan ke depannya.\n\n" .
+        "Terima kasih atas waktu dan kepercayaannya.";
+    
 
         $encodedMessage = urlencode($message);
 
@@ -48,10 +52,17 @@ class SurveyController extends Controller
     public function clientUpdate(Request $request, Order $order)
     {
         $validated = $request->validate([
-            'testimoni' => 'required',
+            'testimoni' => 'required|string',
+            'kritik_saran' => 'required|string',
         ]);
 
-        $order->testimoni = $request->testimoni;
+        $order->testimoni = $validated['testimoni'];
+        $order->kritikSaran()->create([
+            'id_order' => $order->id,
+            'kritik_saran' => $validated['kritik_saran'],
+            'id_pelanggan' => $order->id_pelanggan,
+        ]);
+
         $order->save();
         return redirect()->route('survey.show', $order->id);
     }

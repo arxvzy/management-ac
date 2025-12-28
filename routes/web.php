@@ -11,6 +11,7 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PengingatController;
 use App\Http\Controllers\PenugasanController;
+use App\Http\Controllers\KritikSaranController;
 use App\Http\Controllers\PengeluaranController;
 
     Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
@@ -60,6 +61,8 @@ Route::middleware(['role:admin'])->group(function () {
 
     Route::get('/survey', [SurveyController::class, 'adminIndex'])->name('admin.survey.index');
     Route::put('/survey/{order}', [SurveyController::class, 'adminUpdate'])->name('admin.survey.kirim');
+
+    Route::get('/feedback', [KritikSaranController::class, 'index'])->name('admin.feedback.index');
 });
 
 Route::middleware(['role:admin,teknisi'])->group(function () {
