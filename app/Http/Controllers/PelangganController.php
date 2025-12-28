@@ -10,9 +10,18 @@ class PelangganController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pelanggans = Pelanggan::paginate(10);
+        $search = $request->query('search');
+
+        $pelanggans = Pelanggan::when($search, function ($query, $search) {
+            $query->where('nama', 'like', "%{$search}%")
+                ->orWhere('no_hp', 'like', "%{$search}%")
+                ->orWhere('alamat', 'like', "%{$search}%");
+        })
+            ->paginate(10)
+            ->withQueryString();
+
         return view('admin.pelanggan.index', compact('pelanggans'));
     }
 
@@ -30,15 +39,15 @@ class PelangganController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-        'nama' => 'required|string|max:255', 
-        'alamat' => 'required',
-        'no_hp' => 'required|numeric',
-        'koordinat' => 'required'
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required',
+            'no_hp' => 'required|numeric',
+            'koordinat' => 'required'
         ]);
 
         $pelanggan = Pelanggan::create($validated);
         return redirect()->route('admin.pelanggan.index')
-        ->with('success', 'Pelanggan berhasil ditambahkan');
+            ->with('success', 'Pelanggan berhasil ditambahkan');
     }
 
 
@@ -57,10 +66,10 @@ class PelangganController extends Controller
     public function update(Request $request, Pelanggan $pelanggan)
     {
         $validated = $request->validate([
-        'nama' => 'required|string|max:255', 
-        'alamat' => 'required',
-        'no_hp' => 'required',
-        'koordinat' => 'required'
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required',
+            'no_hp' => 'required',
+            'koordinat' => 'required'
         ]);
 
         $pelanggan->update($validated);

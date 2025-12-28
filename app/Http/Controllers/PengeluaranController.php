@@ -11,14 +11,24 @@ class PengeluaranController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        if ($user->role == 'teknisi') {
-            $pengeluarans = Pengeluaran::with('pengguna')->where('id_pengguna', $user->id)->orderBy('created_at', 'desc')->paginate(10);
-        } else {
-            $pengeluarans = Pengeluaran::with('pengguna')->orderBy('created_at', 'desc')->paginate(10);
-        }
+        $search = $request->query('search');
+
+        $pengeluarans = Pengeluaran::with('pengguna')
+            ->when($user->role === 'teknisi', function ($query) use ($user) {
+                $query->where('id_pengguna', $user->id);
+            })
+            ->when($search, function ($query, $search) {
+                $query->whereHas('pengguna', function ($q) use ($search) {
+                    $q->where('nama', 'like', "%{$search}%");
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
         return view('admin.pengeluaran.index', compact('pengeluarans'));
     }
 

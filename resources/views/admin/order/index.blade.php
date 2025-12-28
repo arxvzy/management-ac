@@ -11,8 +11,17 @@
         @if (session()->has('success'))
             <x-alert>Order</x-alert>
         @endif
-        <h4 class="mt-4 text-lg font-semibold">
+        <h4 class="mt-4 text-lg font-semibold flex justify-between">
             <x-button class="py-2" href="{{ route('admin.order.tambah') }}">Tambah</x-button>
+            <form method="GET" class="mb-4 flex items-center gap-2"
+                onsubmit="if(!this.search.value.trim()) this.search.disabled = true;">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari order ..."
+                    class="md:w-64 w-28
+                     px-3 py-2 text-sm border rounded-lg border-gray-300 dark:bg-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600">
+                <button class="px-4 py-2 text-sm bg-purple-600 text-white rounded-lg">
+                    Cari
+                </button>
+            </form>
         </h4>
 
         <table id="orderTable" class="display dark:text-gray-400">

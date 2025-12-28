@@ -8,6 +8,16 @@
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             History Order
         </h2>
+        <h4 class="mt-4 text-lg font-semibold flex justify-end">
+            <form method="GET" class="mb-4 flex items-center gap-2"
+                onsubmit="if(!this.search.value.trim()) this.search.disabled = true;">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari Riwayat Order ..."
+                    class="w-28 md:w-64 px-3 py-2 text-sm border rounded-lg border-gray-300 dark:bg-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600">
+                <button class="px-4 py-2 text-sm bg-purple-600 text-white rounded-lg">
+                    Cari
+                </button>
+            </form>
+        </h4>
         <table id="historyTable" class="display dark:text-gray-400">
             <thead>
                 <tr

@@ -10,9 +10,17 @@ class PenggunaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $penggunas = Pengguna::paginate(10);
+        $search = $request->query('search');
+
+        $penggunas = Pengguna::when($search, function ($query, $search) {
+            $query->where('nama', 'like', "%{$search}%")
+                ->orWhere('role', 'like', "%{$search}%");
+        })
+            ->paginate(10)
+            ->withQueryString();
+
         return view('admin.pengguna.index', compact('penggunas'));
     }
 
@@ -30,10 +38,10 @@ class PenggunaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-        'nama' => 'required|string|max:255', 
-        'username' => 'required|unique:pengguna,username|max:16',
-        'password' => 'required|min:6',
-        'role' => 'required'
+            'nama' => 'required|string|max:255',
+            'username' => 'required|unique:pengguna,username|max:16',
+            'password' => 'required|min:6',
+            'role' => 'required'
         ]);
 
         $validated['password'] = bcrypt($request->password);
@@ -41,7 +49,7 @@ class PenggunaController extends Controller
 
 
         return redirect()->route('admin.pengguna.index')
-        ->with('success', 'Pengguna berhasil ditambahkan');
+            ->with('success', 'Pengguna berhasil ditambahkan');
     }
 
     /**
@@ -58,11 +66,11 @@ class PenggunaController extends Controller
     public function update(Request $request, Pengguna $pengguna)
     {
         $validated = $request->validate([
-            'nama' => 'required|string|max:255', 
+            'nama' => 'required|string|max:255',
             'username' => 'required|max:16',
             'role' => 'required',
             'is_active' => 'required|boolean'
-            ]);
+        ]);
 
         $pengguna->update($validated);
         return redirect()->route('admin.pengguna.index');
@@ -76,5 +84,4 @@ class PenggunaController extends Controller
         $pengguna->delete();
         return redirect()->route('admin.pengguna.index');
     }
-
 }

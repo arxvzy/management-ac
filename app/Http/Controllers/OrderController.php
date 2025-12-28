@@ -13,9 +13,25 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->orderBy('created_at', 'desc')->paginate(10);
+        $search = $request->query('search');
+
+        $orders = Order::with(['jasa', 'pelanggan', 'pengguna'])
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->whereHas('pelanggan', function ($p) use ($search) {
+                        $p->where('nama', 'like', "%{$search}%")
+                            ->orWhere('no_hp', 'like', "%{$search}%");
+                    })
+                        ->orWhereHas('pengguna', function ($u) use ($search) {
+                            $u->where('nama', 'like', "%{$search}%");
+                        });
+                });
+            })
+            ->paginate(10)
+            ->withQueryString();
+
         return view('admin.order.index', compact('orders'));
     }
 
@@ -49,7 +65,7 @@ class OrderController extends Controller
             'jadwal' => 'required',
             'harga_awal' => "required|numeric",
         ]);
-        if($request->has('deskripsi')) {
+        if ($request->has('deskripsi')) {
             $validated['deskripsi'] = $request->deskripsi;
         }
         if ($request->has('id_pengguna')) {
@@ -69,7 +85,7 @@ class OrderController extends Controller
         $pelanggans = Pelanggan::orderBy('nama')->get();
         $penggunas = Pengguna::where('role', 'teknisi')->orderBy('nama')->get();
         $jasas = Jasa::orderBy('jasa')->get();
-        return view('admin.order.edit', compact('order','pelanggans', 'penggunas', 'jasas'));
+        return view('admin.order.edit', compact('order', 'pelanggans', 'penggunas', 'jasas'));
     }
 
     /**
@@ -83,13 +99,13 @@ class OrderController extends Controller
             'jadwal' => 'required|date',
             'harga_awal' => "required|numeric",
         ]);
-        if($request->has('deskripsi')) {
+        if ($request->has('deskripsi')) {
             $validated['deskripsi'] = $request->deskripsi;
         }
         if ($request->has('id_pengguna')) {
             $validated['id_pengguna'] = $request->id_pengguna;
         }
-        
+
         $order->update($validated);
 
         return redirect()->route('admin.order.index');
