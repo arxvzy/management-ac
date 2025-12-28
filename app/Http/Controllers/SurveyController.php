@@ -12,7 +12,7 @@ class SurveyController extends Controller
      */
     public function adminIndex()
     {
-        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->where('is_survey_sent', false)->where('status', 'selesai')->latest()->paginate(10);
+        $orders = Order::with('jasa', 'pelanggan', 'pengguna')->where('status', 'selesai')->orderBy('tgl_pengerjaan', 'desc')->paginate(10);
         return view('admin.survey.index', compact('orders'));
     }
 
@@ -25,7 +25,7 @@ class SurveyController extends Controller
         $order->is_survey_sent = true;
         $order->save();
 
-        $message = "Halo, {$order->pelanggan->nama}\n\n" .
+        $message = "Halo, {$order->pelanggan->nama}.\n\n" .
         "Terima kasih telah menggunakan layanan kami.\n\n" .
         "Kami sangat menghargai apabila Anda bersedia mengisi survey pada link berikut:\n" .
         env('APP_URL') . "/survey/{$order->id}\n\n" .

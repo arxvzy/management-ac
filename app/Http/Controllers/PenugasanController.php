@@ -18,9 +18,9 @@ class PenugasanController extends Controller
         $user = Auth::user();
         if ($user->role == 'teknisi') {
             $orders = Order::where('id_pengguna', $user->id)
-                ->whereNull('status')->orderBy('jadwal', 'asc')->paginate(10);
+                ->whereNull('status')->latest()->paginate(10);
         } else {
-            $orders = Order::whereNull('status')->orderBy('jadwal', 'asc')->paginate(10);
+            $orders = Order::whereNull('status')->latest()->paginate(10);
         }
         return view('admin.penugasan.index', compact('orders'));
     }
