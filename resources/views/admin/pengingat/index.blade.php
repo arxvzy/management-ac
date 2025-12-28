@@ -37,7 +37,7 @@
                                 @csrf
                                 @method('PUT')
                                 <button type="submit">
-                                    <x-heroicon-o-chat-bubble-left-ellipsis class="w-5 h-5" />
+                                    <x-bi-whatsapp class="w-5 h-5" />
                                 </button>
                             </form>
                         </td>

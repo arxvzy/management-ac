@@ -15,7 +15,7 @@
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <th>No.</th>
                     <th>Nama Pelanggan</th>
-                    <th>No. HP</th>
+                    <th>Kritik & Saran</th>
                     <th>Tanggal Pengerjaan</th>
                     <th>Jasa</th>
                     <th>Status</th>
@@ -27,16 +27,23 @@
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td>{{ $orderRow++ }}</td>
                         <td>{{ $order->pelanggan->nama ?? '-' }}</td>
-                        <td>{{ $order->pelanggan->no_hp ?? '-' }}</td>
+                        <td>{{ $order->kritikSaran->kritik_saran ?? '-' }}</td>
                         <td>
                             {{ \Carbon\Carbon::parse($order->tgl_pengerjaan)->translatedFormat('l, j F Y H:i') }}
                         </td>
                         <td>{{ $order->jasa->jasa ?? '-' }}</td>
                         <td class="text-xs">
-                            <span
-                                class="px-2 py-1 font-semibold leading-tight  rounded-full text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100">
-                                Belum dikirim
-                            </span>
+                            @if ($order->is_survey_sent)
+                                <span
+                                    class="px-2 py-1 font-semibold leading-tight  rounded-full text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100">
+                                    Sudah dikirim
+                                </span>
+                            @else
+                                <span
+                                    class="px-2 py-1 font-semibold leading-tight  rounded-full text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100">
+                                    Belum dikirim
+                                </span>
+                            @endif
                         </td>
                         <td>
                             <form action="{{ route('admin.survey.kirim', $order->id) }}" method="POST"
@@ -45,7 +52,7 @@
                                 @csrf
                                 @method('PUT')
                                 <button type="submit">
-                                    <x-heroicon-o-chat-bubble-left-ellipsis class="w-5 h-5" />
+                                    <x-bi-whatsapp class="w-5 h-5" />
                                 </button>
                             </form>
                         </td>
