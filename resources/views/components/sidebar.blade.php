@@ -1,9 +1,10 @@
 <!-- Desktop sidebar -->
 <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
     <div class="py-4 text-gray-500 dark:text-gray-400">
-        <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="{{ route('admin.home') }}">
-            Management AC
+        <a href="{{ route('admin.home') }}">
+            <img src="{{ asset('assets/img/logo.png') }}" alt="" class="h-20 ml-6">
         </a>
+
         <ul class="mt-6">
             @if (auth()->user()->role == 'admin')
                 <li class="relative px-6 py-3">
@@ -134,8 +135,9 @@
     x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
     @keydown.escape="closeSideMenu">
     <div class="py-4 text-gray-500 dark:text-gray-400">
-        <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="{{ route('admin.home') }}">
-            Management AC
+        <a href="{{ route('admin.home') }}">
+            <img src="{{ asset('assets/img/logo.png') }}" alt="" class="
+         h-20 ml-6">
         </a>
         <ul class="mt-6">
             @if (auth()->user()->role == 'admin')
