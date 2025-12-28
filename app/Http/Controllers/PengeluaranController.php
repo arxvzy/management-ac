@@ -25,7 +25,7 @@ class PengeluaranController extends Controller
                     $q->where('nama', 'like', "%{$search}%");
                 });
             })
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->paginate(10)
             ->withQueryString();
 

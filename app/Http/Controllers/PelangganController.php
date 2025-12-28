@@ -19,6 +19,7 @@ class PelangganController extends Controller
                 ->orWhere('no_hp', 'like', "%{$search}%")
                 ->orWhere('alamat', 'like', "%{$search}%");
         })
+            ->latest()
             ->paginate(10)
             ->withQueryString();
 

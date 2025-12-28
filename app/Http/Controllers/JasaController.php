@@ -12,7 +12,7 @@ class JasaController extends Controller
      */
     public function index()
     {
-        $jasas = Jasa::orderBy('jasa', 'asc')->paginate(10);
+        $jasas = Jasa::latest()->paginate(10);
         return view('admin.jasa.index', compact('jasas'));
     }
 

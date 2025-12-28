@@ -9,7 +9,7 @@ class KritikSaranController extends Controller
 {
     public function index()
     {
-        $kritiksarans = KritikSaran::with(['order', 'pelanggan'])->paginate(10);
+        $kritiksarans = KritikSaran::with(['order', 'pelanggan'])->latest()->paginate(10);
         return view('admin.kritikSaran.index', compact('kritiksarans'));
     }
 }

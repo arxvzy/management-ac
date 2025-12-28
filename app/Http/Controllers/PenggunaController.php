@@ -18,6 +18,7 @@ class PenggunaController extends Controller
             $query->where('nama', 'like', "%{$search}%")
                 ->orWhere('role', 'like', "%{$search}%");
         })
+            ->latest()
             ->paginate(10)
             ->withQueryString();
 

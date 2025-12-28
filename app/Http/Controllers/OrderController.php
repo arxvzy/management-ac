@@ -33,6 +33,7 @@ class OrderController extends Controller
                         });
                 });
             })
+            ->latest()
             ->paginate(10)
             ->withQueryString();
 

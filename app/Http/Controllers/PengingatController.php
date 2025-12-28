@@ -32,6 +32,7 @@ class PengingatController extends Controller
                 'pelanggan.updated_at'
             )
             ->havingRaw('latest_order_date <= ?', [Carbon::now()->subMonths(3)])
+            ->orderByDesc('latest_order_date')
             ->paginate(10);
 
 
