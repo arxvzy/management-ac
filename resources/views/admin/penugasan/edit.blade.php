@@ -1,10 +1,10 @@
 @extends('layouts.admin')
-@section('title', 'Edit Pekerjaan')
+@section('title', 'Penyelesaian Pekerjaan')
 
 @section('content')
     <div>
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            Edit Pekerjaan
+            Penyelesaian Pekerjaan
         </h2>
         <form action="{{ route('admin.penugasan.update', $order->id) }}" method="POST"
             class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -85,7 +85,7 @@
                     <span class="text-red-400">{{ $message }}</span>
                 @enderror
             </label>
-            <x-button class="mt-6 py-3" type="submit">Simpan</x-button>
+            <x-button class="mt-6 py-3" type="submit">Selesai</x-button>
         </form>
     </div>
 @endsection

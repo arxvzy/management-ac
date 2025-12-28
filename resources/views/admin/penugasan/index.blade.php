@@ -31,7 +31,7 @@
                         <td>{{ $order->pelanggan->nama ?? '-' }}</td>
                         <td>{{ $order->pelanggan->alamat ?? '-' }}</td>
                         <td>{{ $order->pelanggan->no_hp ?? '-' }}</td>
-                        <td><a href="{{ $pelanggan->koordinat ?? '#' }}" class="underline"
+                        <td><a href="{{ $order->pelanggan->koordinat ?? '#' }}" class="underline"
                                 target="_blank">{{ $order->pelanggan->koordinat ?? '-' }}</a></td>
                         <td>{{ $order->jasa->jasa ?? '-' }}</td>
                         <td>{{ $order->pengguna->nama ?? '-' }}</td>
@@ -44,7 +44,7 @@
                                 <a href="{{ route('admin.penugasan.edit', $order->id) }}"
                                     class="flex items-center justify-start px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray "
                                     aria-label="Edit">
-                                    <x-heroicon-s-pencil class="w-5 h-5" />
+                                    <x-heroicon-m-check class="w-5 h-5" />
                                 </a>
                                 <a href="{{ route('admin.penugasan.show', $order->id) }}"
                                     class="flex items-center justify-start px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray "
