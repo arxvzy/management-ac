@@ -22,10 +22,14 @@ class OrderController extends Controller
                 $query->where(function ($q) use ($search) {
                     $q->whereHas('pelanggan', function ($p) use ($search) {
                         $p->where('nama', 'like', "%{$search}%")
-                            ->orWhere('no_hp', 'like', "%{$search}%");
+                            ->orWhere('no_hp', 'like', "%{$search}%")
+                            ->orWhere('alamat', 'like', "%{$search}%");
                     })
                         ->orWhereHas('pengguna', function ($u) use ($search) {
                             $u->where('nama', 'like', "%{$search}%");
+                        })
+                        ->orWhereHas('jasa', function ($j) use ($search) {
+                            $j->where('jasa', 'like', "%{$search}%");
                         });
                 });
             })

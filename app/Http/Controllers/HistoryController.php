@@ -24,6 +24,9 @@ class HistoryController extends Controller
                     })
                         ->orWhereHas('pengguna', function ($u) use ($search) {
                             $u->where('nama', 'like', "%{$search}%");
+                        })
+                        ->orWhereHas('jasa', function ($j) use ($search) {
+                            $j->where('jasa', 'like', "%{$search}%");
                         });
                 });
             })
