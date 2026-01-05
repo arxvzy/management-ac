@@ -15,7 +15,9 @@
                     <th>No.</th>
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
-                    <th>No. HP</th>
+                    @if (auth()->user()->role == 'admin')
+                        <th>No. HP</th>
+                    @endif
                     <th>Status</th>
                     <th>Koordinat</th>
                     <th>Jasa</th>
@@ -31,7 +33,9 @@
                         <td>{{ $orderRow++ }}</td>
                         <td>{{ $order->pelanggan->nama ?? '-' }}</td>
                         <td>{{ $order->pelanggan->alamat ?? '-' }}</td>
-                        <td>{{ $order->pelanggan->no_hp ?? '-' }}</td>
+                        @if (auth()->user()->role == 'admin')
+                            <td>{{ $order->pelanggan->no_hp ?? '-' }}</td>
+                        @endif
                         <td class="text-xs">
                             <div
                                 class="text-xs px-2 py-1 font-semibold leading-tight  rounded-full  text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100 text-center">
