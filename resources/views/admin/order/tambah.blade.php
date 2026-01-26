@@ -28,23 +28,49 @@
                     <span class="text-red-400">{{ $message }}</span>
                 @enderror
             </label>
-            <label class="block mt-4 text-sm">
+            <label class="block mt-4 text-sm" x-data="searchableSelect({{ $pelanggans->toJson() }})">
                 <span class="text-gray-700 dark:text-gray-400">
                     Nama Pelanggan
                 </span>
-                <select
-                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                    name="id_pelanggan">
-                    <option disabled selected>Pilih Pelanggan</option>
-                    @foreach ($pelanggans as $pelanggan)
-                        <option value="{{ $pelanggan->id }}" {{ old('id_pelanggan') == $pelanggan->id ? 'selected' : '' }}>
-                            {{ $pelanggan->nama }}</option>
-                    @endforeach
+
+                <div class="relative mt-1">
+                    <input type="text" x-model="search" @focus="open = true" @blur="closeLater()"
+                        placeholder="Cari pelanggan"
+                        class="block w-full text-sm form-input
+                   text-gray-900 bg-white border-gray-300
+                   dark:text-gray-200 dark:bg-gray-700 dark:border-gray-600
+                   focus:border-purple-400 focus:outline-none">
+
+                    <div x-show="open" x-transition
+                        class="absolute z-20 w-full mt-1 max-h-48 overflow-y-auto
+                   bg-white border border-gray-300 rounded-md shadow-lg
+                   dark:bg-gray-800 dark:border-gray-600">
+                        <template x-if="filtered.length === 0">
+                            <div class="px-3 py-2 text-sm text-gray-500 dark:text-gray-400">
+                                Pelanggan tidak ditemukan
+                            </div>
+                        </template>
+
+                        <template x-for="pelanggan in filtered" :key="pelanggan.id">
+                            <div @mousedown.prevent="choose(pelanggan)"
+                                class="px-3 py-2 text-sm cursor-pointer
+                           text-gray-700 hover:bg-purple-100
+                           dark:text-gray-200 dark:hover:bg-gray-600"
+                                x-text="pelanggan.nama"></div>
+                        </template>
+                    </div>
+                </div>
+
+                <select name="id_pelanggan" class="hidden">
+                    <option :value="selected?.id" selected></option>
                 </select>
+
                 @error('id_pelanggan')
                     <span class="text-red-400">{{ $message }}</span>
                 @enderror
             </label>
+
+
             <label class="mt-4 block text-sm text-gray-700 dark:text-gray-400">Harga Awal (IDR)</label>
             <div class="flex items-center mt-1">
                 <span

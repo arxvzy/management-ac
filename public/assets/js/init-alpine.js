@@ -38,3 +38,31 @@ function data() {
         },
     };
 }
+
+function searchableSelect(items, preselected = null) {
+    return {
+        search: preselected ? preselected.nama : "",
+        selected: preselected,
+        items: items,
+        open: false,
+
+        get filtered() {
+            if (this.search === "") return this.items;
+            return this.items.filter((item) =>
+                item.nama.toLowerCase().includes(this.search.toLowerCase())
+            );
+        },
+
+        choose(item) {
+            this.selected = item;
+            this.search = item.nama;
+            this.open = false;
+        },
+
+        closeLater() {
+            setTimeout(() => {
+                this.open = false;
+            }, 150);
+        },
+    };
+}
